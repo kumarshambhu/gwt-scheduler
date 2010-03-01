@@ -22,7 +22,7 @@ public class EventsPanel extends AbstractGridOverlay implements WidgetResizeHand
     AppInjector.GIN.getInjector().getEventBus().addHandler(AppointmentEvent.getType(), this);
     getElement().getStyle().setPosition(Position.ABSOLUTE);
     //TODO fix zIndex
-    //    getElement().getStyle().setZIndex(Constants.EVENTS_ZINDEX);
+//        getElement().getStyle().setZIndex(Constants.EVENTS_ZINDEX);
   }
 
   @Override
