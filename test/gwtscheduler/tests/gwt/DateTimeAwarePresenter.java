@@ -17,7 +17,7 @@ import com.google.gwt.user.client.ui.Widget;
  * Utility class for lasso tests.
  * @author malp
  */
-public class DateTimeAwarePresenter implements ComplexGrid,CalendarPresenter {
+public class DateTimeAwarePresenter implements ComplexGrid, CalendarPresenter {
 
   final int rows, cols;
 
@@ -83,6 +83,11 @@ public class DateTimeAwarePresenter implements ComplexGrid,CalendarPresenter {
   }
 
   @Override
+  public boolean isWithinDateRange(Interval interval) {
+    return false;
+  }
+
+  @Override
   public void forceLayout() {
   }
 
@@ -121,7 +126,5 @@ public class DateTimeAwarePresenter implements ComplexGrid,CalendarPresenter {
   @Override
   public void unbind() {
   }
-  
-  
 
 }

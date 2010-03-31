@@ -22,7 +22,7 @@ public class AbstractGridOverlay extends AbsolutePanel implements WidgetResizeHa
    * Default constructor.
    * @param strat
    */
-  AbstractGridOverlay() {
+  protected AbstractGridOverlay() {
     this(new AbsolutePanel());
   }
 
@@ -30,7 +30,7 @@ public class AbstractGridOverlay extends AbsolutePanel implements WidgetResizeHa
    * Creates a new grid overlay
    * @param container the main container
    */
-  AbstractGridOverlay(AbsolutePanel container) {
+  protected AbstractGridOverlay(AbsolutePanel container) {
     // lasso/ events set up
     overlayPanel = container;
     add(overlayPanel, 0, 0);

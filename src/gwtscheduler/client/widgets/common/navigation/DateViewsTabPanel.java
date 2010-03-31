@@ -10,6 +10,8 @@ import gwtscheduler.client.widgets.common.CalendarPresenter;
 
 import com.google.gwt.event.logical.shared.BeforeSelectionEvent;
 import com.google.gwt.event.logical.shared.BeforeSelectionHandler;
+import com.google.gwt.event.logical.shared.SelectionEvent;
+import com.google.gwt.event.logical.shared.SelectionHandler;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.DecoratedTabPanel;
 import com.google.gwt.user.client.ui.Widget;
@@ -20,7 +22,7 @@ import com.google.inject.Inject;
  * @author malp
  */
 //TODO migrate to MVP
-public class DateViewsTabPanel extends Composite implements MainView, BeforeSelectionHandler<Integer> {
+public class DateViewsTabPanel extends Composite implements MainView, BeforeSelectionHandler<Integer>, SelectionHandler<Integer> {
 
   /** static ref to css */
   protected static final DayWeekCssResource CSS = Resources.dayWeekCss();
@@ -41,6 +43,7 @@ public class DateViewsTabPanel extends Composite implements MainView, BeforeSele
     impl = new DecoratedTabPanel();
     initWidget(impl);
     impl.addBeforeSelectionHandler(this);
+    impl.addSelectionHandler(this);
 
     presenters = new CalendarPresenter[3];
     presenters[0] = day;
@@ -64,7 +67,13 @@ public class DateViewsTabPanel extends Composite implements MainView, BeforeSele
   }
 
   public void onBeforeSelection(BeforeSelectionEvent<Integer> event) {
-    CalendarPresenter presenter = presenters[event.getItem()];
+//    CalendarPresenter presenter = presenters[event.getItem()];
+//    presenter.forceLayout();
+  }
+
+  @Override
+  public void onSelection(SelectionEvent<Integer> event) {
+    CalendarPresenter presenter = presenters[event.getSelectedItem()];
     presenter.forceLayout();
   }
 

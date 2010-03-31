@@ -10,13 +10,14 @@ import gwtscheduler.client.widgets.common.Cell;
 import gwtscheduler.client.widgets.common.ComplexGrid;
 import gwtscheduler.client.widgets.common.LassoStrategy;
 import gwtscheduler.client.widgets.common.decoration.HasMultipleDecorables;
+import gwtscheduler.client.widgets.common.event.AppointmentEvent;
 import gwtscheduler.client.widgets.common.event.HasWidgetRedrawHandlers;
 import gwtscheduler.client.widgets.common.event.WidgetRedrawEvent;
 import gwtscheduler.client.widgets.common.event.WidgetRedrawHandler;
 import gwtscheduler.client.widgets.common.event.WidgetResizeEvent;
-import gwtscheduler.client.widgets.view.common.EventsPanel;
 import gwtscheduler.client.widgets.view.common.LassoAwarePanel;
 import gwtscheduler.client.widgets.view.common.cell.BaseCell;
+import gwtscheduler.client.widgets.view.events.EventsPanel;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -112,11 +113,6 @@ public abstract class AbstractDaysView extends Composite implements DaysDisplay,
   @UiFactory
   protected abstract AbstractDaysPanel buildDaysPanel();
 
-  @Override
-  public void forceLayout() {
-    lassoAwarePanel.doDeferRedrawResize(new WidgetResizeEvent(), new WidgetRedrawEvent());
-  }
-
   /**
    * Gets the number of columns
    * @return the number of cols
@@ -142,6 +138,11 @@ public abstract class AbstractDaysView extends Composite implements DaysDisplay,
   }
 
   @Override
+  public void forceLayout() {
+    lassoAwarePanel.doDeferRedrawResize(new WidgetResizeEvent(), new WidgetRedrawEvent());
+  }
+
+  @Override
   public void forceLayout(Widget lassoPanel, WidgetResizeEvent event) {
     Element first = getContentDecorableElements().get(0).getCellElement();
     int[] offset = DOMUtils.getOffset(lassoPanel.getParent().getElement(), first);
@@ -153,6 +154,11 @@ public abstract class AbstractDaysView extends Composite implements DaysDisplay,
     AppConfiguration config = AppInjector.GIN.getInjector().getConfiguration();
     lassoPanel.setSize("100%", (config.daysLineHeightEMs() * daysPanel.getRows()) + "em");
     eventsPanel.setSize("100%", (config.daysLineHeightEMs() * daysPanel.getRows()) + "em");
+  }
+
+  @Override
+  public void addAppointment(AppointmentEvent evt) {
+    eventsPanel.addAppointment(evt);
   }
 
   public List<Cell<Element>> getColumnsDecorableElements() {

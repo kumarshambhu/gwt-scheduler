@@ -1,4 +1,4 @@
-package gwtscheduler.client.widgets.view.common;
+package gwtscheduler.client.widgets.view.events;
 
 import gwtscheduler.client.widgets.common.CalendarPresenter;
 import gwtscheduler.client.widgets.common.event.AbstractLassoEvent;
@@ -38,8 +38,6 @@ public class EventsMediator implements LassoEventHandler {
   public void onEndSelection(LassoEndSelectionEvent event) {
     if (event.subject == presenter) {
       Interval time = presenter.getIntervalForRange(event.cell, event.endCell);
-      //      Window.alert(time.getStart() + "->" + time.getEnd());
-
       AbstractAppointment appointment = new SimpleAppointment(time);
       AppointmentEvent evt = new AppointmentEvent(presenter, appointment, event.cell, event.endCell);
       eventBus.fireEvent(evt);

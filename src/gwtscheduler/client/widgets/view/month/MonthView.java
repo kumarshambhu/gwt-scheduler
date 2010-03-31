@@ -9,13 +9,14 @@ import gwtscheduler.client.widgets.common.Cell;
 import gwtscheduler.client.widgets.common.ComplexGrid;
 import gwtscheduler.client.widgets.common.LassoStrategy;
 import gwtscheduler.client.widgets.common.decoration.HasMultipleDecorables;
+import gwtscheduler.client.widgets.common.event.AppointmentEvent;
 import gwtscheduler.client.widgets.common.event.HasWidgetRedrawHandlers;
 import gwtscheduler.client.widgets.common.event.WidgetRedrawEvent;
 import gwtscheduler.client.widgets.common.event.WidgetRedrawHandler;
 import gwtscheduler.client.widgets.common.event.WidgetResizeEvent;
-import gwtscheduler.client.widgets.view.common.EventsPanel;
 import gwtscheduler.client.widgets.view.common.LassoAwarePanel;
 import gwtscheduler.client.widgets.view.common.cell.BaseCell;
+import gwtscheduler.client.widgets.view.events.EventsPanel;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -143,6 +144,11 @@ public class MonthView extends Composite implements LassoAwarePanel.LassoHandler
     lassoAwarePanel.initLasso(strat, subject);
   }
 
+  @Override
+  public void addAppointment(AppointmentEvent evt) {
+    eventsPanel.addAppointment(evt);
+  }
+
   /**
    * Shows a given number of rows, hiding the others.
    * @param rowNum the number of rows
@@ -175,13 +181,13 @@ public class MonthView extends Composite implements LassoAwarePanel.LassoHandler
   }
 
   @Override
-  public List<Cell<Element>> getVisibleElements() {
-    return monthPanel.getMainElements();
+  public int getWidth() {
+    return monthPanel.getWidth();
   }
 
   @Override
-  public int getWidth() {
-    return monthPanel.getWidth();
+  public List<Cell<Element>> getVisibleElements() {
+    return monthPanel.getMainElements();
   }
 
   @Override

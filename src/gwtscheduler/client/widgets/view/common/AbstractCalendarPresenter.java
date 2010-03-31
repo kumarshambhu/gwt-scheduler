@@ -3,8 +3,11 @@ package gwtscheduler.client.widgets.view.common;
 import gwtscheduler.client.widgets.common.CalendarPresenter;
 import gwtscheduler.client.widgets.common.ComplexGrid;
 import gwtscheduler.client.widgets.common.GenericCalendarDisplay;
+import gwtscheduler.client.widgets.common.event.AppointmentEvent;
+import gwtscheduler.client.widgets.common.event.AppointmentHandler;
 import gwtscheduler.client.widgets.common.navigation.DateGenerator;
 import gwtscheduler.client.widgets.common.navigation.EventNavigationListener;
+import gwtscheduler.client.widgets.view.events.EventsMediator;
 import net.customware.gwt.presenter.client.EventBus;
 import net.customware.gwt.presenter.client.place.Place;
 import net.customware.gwt.presenter.client.place.PlaceRequest;
@@ -22,7 +25,7 @@ import com.google.inject.Inject;
  * @author malp
  */
 public abstract class AbstractCalendarPresenter<T extends GenericCalendarDisplay> extends WidgetPresenter<T> implements CalendarPresenter,
-    EventNavigationListener, ComplexGrid {
+    EventNavigationListener, ComplexGrid, AppointmentHandler {
 
   @Inject
   private DateGenerator factory;
@@ -34,12 +37,30 @@ public abstract class AbstractCalendarPresenter<T extends GenericCalendarDisplay
    */
   protected AbstractCalendarPresenter(T display, EventBus eventBus) {
     super(display, eventBus);
-    new EventsMediator(this,eventBus);
+    new EventsMediator(this, eventBus);
+    eventBus.addHandler(AppointmentEvent.getType(), this);
   }
 
   @Override
   public Interval getCurrentInterval() {
     return getFactory().interval();
+  }
+
+  /**
+   * Events methods.
+   */
+
+  @Override
+  public void onAddEvent(AppointmentEvent evt) {
+    if (isWithinDateRange(evt.appointment.interval())) {
+      //XXX implement the rest of this
+      getDisplay().addAppointment(evt);
+    }
+  }
+
+  @Override
+  public boolean isWithinDateRange(Interval interval) {
+    return getFactory().interval().contains(interval);
   }
 
   /**
@@ -64,30 +85,6 @@ public abstract class AbstractCalendarPresenter<T extends GenericCalendarDisplay
   @Override
   public void forceLayout() {
     getDisplay().forceLayout();
-  }
-
-  /**
-   * View Controller methods
-   */
-
-  @Override
-  protected void onBind() {
-  }
-
-  @Override
-  protected void onPlaceRequest(PlaceRequest request) {
-  }
-
-  @Override
-  protected void onUnbind() {
-  }
-
-  @Override
-  public void refreshDisplay() {
-  }
-
-  @Override
-  public void revealDisplay() {
   }
 
   /**
@@ -128,6 +125,30 @@ public abstract class AbstractCalendarPresenter<T extends GenericCalendarDisplay
     Instant to = getInstantForCell(end).plus(getDurationPerCells(1));
     //this is to make sure that [0,0] is at least one cell's duration
     return new Interval(from, to);
+  }
+
+  /*******************************
+   * View Controller methods. These will be removed later.
+   ****************************/
+
+  @Override
+  protected void onBind() {
+  }
+
+  @Override
+  protected void onPlaceRequest(PlaceRequest request) {
+  }
+
+  @Override
+  protected void onUnbind() {
+  }
+
+  @Override
+  public void refreshDisplay() {
+  }
+
+  @Override
+  public void revealDisplay() {
   }
 
 }

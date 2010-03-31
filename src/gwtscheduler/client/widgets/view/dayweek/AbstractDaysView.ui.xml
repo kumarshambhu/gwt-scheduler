@@ -2,7 +2,8 @@
 <ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder"
 	xmlns:g="urn:import:com.google.gwt.user.client.ui" 
 	xmlns:days="urn:import:gwtscheduler.client.widgets.view.dayweek"
-	xmlns:common="urn:import:gwtscheduler.client.widgets.view.common">
+	xmlns:common="urn:import:gwtscheduler.client.widgets.view.common"
+	xmlns:events="urn:import:gwtscheduler.client.widgets.view.events">
 
 	<ui:style>
 	</ui:style>
@@ -10,7 +11,7 @@
 	<g:VerticalPanel ui:field="impl">
 		<g:FlexTable ui:field="header" />
 		<common:LassoAwarePanel ui:field="lassoAwarePanel">
-			<common:EventsPanel ui:field="eventsPanel" />
+			<events:EventsPanel ui:field="eventsPanel" />
 			<days:AbstractDaysPanel ui:field="daysPanel" />
 		</common:LassoAwarePanel>
 	</g:VerticalPanel>

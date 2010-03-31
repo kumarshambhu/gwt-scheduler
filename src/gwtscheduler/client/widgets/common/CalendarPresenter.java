@@ -53,4 +53,13 @@ public interface CalendarPresenter extends Presenter {
    */
   Instant getInstantForCell(int[] start);
 
+  /**
+   * Indicates if the supplied interval is within the current presenting date
+   * range.
+   * @param interval the interval
+   * @return <code>true</code> if any part of the interval fits within the
+   *         current presenting date range
+   */
+  boolean isWithinDateRange(Interval interval);
+
 }

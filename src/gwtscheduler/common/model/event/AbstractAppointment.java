@@ -25,6 +25,14 @@ public abstract class AbstractAppointment {
   }
 
   /**
+   * Gets the current interval.
+   * @return the interval
+   */
+  public Interval interval() {
+    return interval;
+  }
+
+  /**
    * Filters dates, removing the unecessary parts.
    * @param date the date to filter
    */

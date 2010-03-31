@@ -92,7 +92,7 @@ public class DayPresenter extends AbstractCalendarPresenter<AbstractDaysView> {
   @Override
   protected Duration getDurationPerCells(int count) {
     int minutesPerCell = (24 * 60) / getRowNum();
-    return new Period(0,minutesPerCell * count, 0,0).toStandardDuration();
+    return new Period(0, minutesPerCell * count, 0, 0).toStandardDuration();
   }
 
   @Override
