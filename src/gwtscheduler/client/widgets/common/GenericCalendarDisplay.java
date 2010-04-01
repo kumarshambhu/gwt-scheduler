@@ -2,6 +2,7 @@ package gwtscheduler.client.widgets.common;
 
 import gwtscheduler.client.widgets.common.decoration.HasMultipleDecorables;
 import gwtscheduler.client.widgets.common.event.AppointmentEvent;
+import gwtscheduler.client.widgets.view.events.EventSpan;
 
 import java.util.List;
 
@@ -17,8 +18,9 @@ public interface GenericCalendarDisplay extends WidgetDisplay, ComplexGrid {
 
   /**
    * @param evt
+   * @param eventSpan
    */
-  void addAppointment(AppointmentEvent evt);
+  void addAppointment(AppointmentEvent evt, EventSpan eventSpan);
 
   /**
    * Forces the layout.

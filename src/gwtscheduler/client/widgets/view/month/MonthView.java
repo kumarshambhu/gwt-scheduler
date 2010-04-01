@@ -16,6 +16,7 @@ import gwtscheduler.client.widgets.common.event.WidgetRedrawHandler;
 import gwtscheduler.client.widgets.common.event.WidgetResizeEvent;
 import gwtscheduler.client.widgets.view.common.LassoAwarePanel;
 import gwtscheduler.client.widgets.view.common.cell.BaseCell;
+import gwtscheduler.client.widgets.view.events.EventSpan;
 import gwtscheduler.client.widgets.view.events.EventsPanel;
 
 import java.util.ArrayList;
@@ -75,6 +76,7 @@ public class MonthView extends Composite implements LassoAwarePanel.LassoHandler
     initWidget(uiBinder.createAndBindUi(this));
     eventsPanel.setComplexGrid(this);
     lassoAwarePanel.setOverflowY(false);
+    lassoAwarePanel.setLassoHandler(this);
     lassoAwarePanel.addWidgetResizeHandler(monthPanel.getWidgetResizeHandler());
   }
 
@@ -120,6 +122,7 @@ public class MonthView extends Composite implements LassoAwarePanel.LassoHandler
   public void forceLayout(Widget lassoPanel, WidgetResizeEvent event) {
     lassoPanel.setPixelSize(event.width, event.height);
     eventsPanel.setPixelSize(event.width, event.height);
+    eventsPanel.forceLayout();
   }
 
   public List<Cell<Element>> getColumnsDecorableElements() {
@@ -145,8 +148,8 @@ public class MonthView extends Composite implements LassoAwarePanel.LassoHandler
   }
 
   @Override
-  public void addAppointment(AppointmentEvent evt) {
-    eventsPanel.addAppointment(evt);
+  public void addAppointment(AppointmentEvent evt, EventSpan eventSpan) {
+    eventsPanel.addAppointment(evt, eventSpan);
   }
 
   /**

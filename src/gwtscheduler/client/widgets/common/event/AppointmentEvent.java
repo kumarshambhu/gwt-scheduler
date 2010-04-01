@@ -16,20 +16,15 @@ public class AppointmentEvent extends GwtEvent<AppointmentHandler> {
   //TODO change to an interface
   public final CalendarPresenter owner;
   public final AbstractAppointment appointment;
-  public final int[] from, to;
 
   /**
    * Default constructor for an appointment event
    * @param owner the owner
    * @param appointment the appointment
-   * @param from the start cell
-   * @param to the end cell
    */
-  public AppointmentEvent(CalendarPresenter owner, AbstractAppointment appointment, int[] from, int[] to) {
+  public AppointmentEvent(CalendarPresenter owner, AbstractAppointment appointment) {
     this.owner = owner;
     this.appointment = appointment;
-    this.from = from;
-    this.to = to;
   }
 
   /**

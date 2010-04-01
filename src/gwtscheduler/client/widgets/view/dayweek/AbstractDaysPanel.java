@@ -108,7 +108,8 @@ public abstract class AbstractDaysPanel extends Composite implements HasWidgetRe
    * @return the height in px
    */
   int getHeight() {
-    return grid.getElement().getOffsetHeight();// - CSS.smallBorderPx();
+    int domHeight = grid.getElement().getOffsetHeight();
+    return domHeight;
   }
 
   /**
@@ -116,7 +117,8 @@ public abstract class AbstractDaysPanel extends Composite implements HasWidgetRe
    * @return the width in px
    */
   int getWidth() {
-    return grid.getElement().getOffsetWidth() - CSS.titleColumnWidthPx() - CSS.smallPaddingPx();
+    int domWidth = grid.getElement().getOffsetWidth();
+    return domWidth - CSS.titleColumnWidthPx() - CSS.smallPaddingPx();
   }
 
   /**

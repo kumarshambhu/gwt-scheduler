@@ -15,7 +15,7 @@ import net.customware.gwt.presenter.client.EventBus;
 import org.goda.time.Interval;
 
 /**
- * Mediates event addition.
+ * Mediates event handling.
  * @author malp
  */
 public class EventsMediator implements LassoEventHandler {
@@ -39,7 +39,7 @@ public class EventsMediator implements LassoEventHandler {
     if (event.subject == presenter) {
       Interval time = presenter.getIntervalForRange(event.cell, event.endCell);
       AbstractAppointment appointment = new SimpleAppointment(time);
-      AppointmentEvent evt = new AppointmentEvent(presenter, appointment, event.cell, event.endCell);
+      AppointmentEvent evt = new AppointmentEvent(presenter, appointment);
       eventBus.fireEvent(evt);
     }
   }
