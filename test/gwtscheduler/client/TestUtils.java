@@ -1,4 +1,4 @@
-package gwtscheduler.tests.gwt;
+package gwtscheduler.client;
 
 import static junit.framework.Assert.assertEquals;
 import static junit.framework.Assert.assertTrue;

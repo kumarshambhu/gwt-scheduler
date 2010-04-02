@@ -1,7 +1,8 @@
-package gwtscheduler.tests.gwt.lasso;
+package gwtscheduler.client.lasso;
 
-import static gwtscheduler.tests.gwt.TestUtils.assertInstantDate;
-import gwtscheduler.tests.gwt.DateTimeAwarePresenter;
+import static gwtscheduler.client.TestUtils.assertInstantDate;
+import gwtscheduler.client.AbstractClientTestCase;
+import gwtscheduler.client.mockClasses.MockDateTimeAwarePresenter;
 
 import org.goda.time.Instant;
 import org.goda.time.Interval;
@@ -9,25 +10,20 @@ import org.goda.time.PeriodType;
 import org.junit.Before;
 import org.junit.Test;
 
-import com.google.gwt.junit.client.GWTTestCase;
-
 /**
  * Test case for date factory.
  * @author malp
  */
-public class LassoTests extends GWTTestCase {
+public class LassoTests extends AbstractClientTestCase {
 
-  DateTimeAwarePresenter subject;
+  MockDateTimeAwarePresenter subject;
 
-  @Override
-  public String getModuleName() {
-    return "gwtscheduler.Tests";
-  }
 
   @Before
   @Override
-  public void gwtSetUp() {
-    subject = new DateTimeAwarePresenter(10, 10);
+  public void gwtSetUp() throws Exception {
+    super.gwtSetUp();
+    subject = new MockDateTimeAwarePresenter(10, 10);
   }
 
   @Test

@@ -1,4 +1,4 @@
-package gwtscheduler.tests.mock;
+package gwtscheduler.client.mockClasses;
 
 import gwtscheduler.client.widgets.common.ComplexGrid;
 
@@ -6,7 +6,7 @@ import gwtscheduler.client.widgets.common.ComplexGrid;
  * Utilit class for lasso tests.
  * @author malp
  */
-public class TestLassoSubject implements ComplexGrid {
+public class MockLassoSubject implements ComplexGrid {
 
   final int rows, cols;
 
@@ -15,7 +15,7 @@ public class TestLassoSubject implements ComplexGrid {
    * @param rows the number of rows
    * @param cols the number of cols
    */
-  public TestLassoSubject(int rows, int cols) {
+  public MockLassoSubject(int rows, int cols) {
     this.rows = rows;
     this.cols = cols;
   }

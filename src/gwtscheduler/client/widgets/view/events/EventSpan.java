@@ -1,13 +1,15 @@
 package gwtscheduler.client.widgets.view.events;
 
-import gwtscheduler.client.widgets.common.CalendarPresenter;
+import gwtscheduler.client.widgets.view.common.AbstractCalendarPresenter;
 
 /**
+ * Holds event draw information.
  * @author mping
  */
 public class EventSpan {
 
-  public final CalendarPresenter owner;
+  public final AbstractCalendarPresenter<?> owner;
+
   public final int[] from;
   public final int[] to;
 
@@ -16,8 +18,7 @@ public class EventSpan {
    * @param from
    * @param to
    */
-  public EventSpan(CalendarPresenter owner, int[] from, int[] to) {
-    super();
+  public EventSpan(AbstractCalendarPresenter<?> owner, int[] from, int[] to) {
     this.owner = owner;
     this.from = from;
     this.to = to;

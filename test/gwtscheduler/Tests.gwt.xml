@@ -5,5 +5,5 @@
 <!-- GWT Module for testing calendar -->
 <module>
 	<inherits name='gwtscheduler.Calendar' />
-	<source path="tests/gwt"/>
+	<source path="client"/>
 </module>

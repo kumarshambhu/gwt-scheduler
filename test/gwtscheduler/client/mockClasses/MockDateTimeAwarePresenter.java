@@ -1,4 +1,4 @@
-package gwtscheduler.tests.gwt;
+package gwtscheduler.client.mockClasses;
 
 import gwtscheduler.client.widgets.common.CalendarPresenter;
 import gwtscheduler.client.widgets.common.ComplexGrid;
@@ -17,7 +17,7 @@ import com.google.gwt.user.client.ui.Widget;
  * Utility class for lasso tests.
  * @author malp
  */
-public class DateTimeAwarePresenter implements ComplexGrid, CalendarPresenter {
+public class MockDateTimeAwarePresenter implements ComplexGrid, CalendarPresenter {
 
   final int rows, cols;
 
@@ -34,7 +34,7 @@ public class DateTimeAwarePresenter implements ComplexGrid, CalendarPresenter {
    * @param rows the number of rows
    * @param cols the number of cols
    */
-  public DateTimeAwarePresenter(int rows, int cols) {
+  public MockDateTimeAwarePresenter(int rows, int cols) {
     this.rows = rows;
     this.cols = cols;
   }

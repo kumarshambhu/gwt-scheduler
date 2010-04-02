@@ -2,6 +2,7 @@ package gwtscheduler.client.widgets.common.navigation;
 
 import org.goda.time.Interval;
 import org.goda.time.ReadableDateTime;
+import org.goda.time.ReadableInterval;
 
 /**
  * Defines event controller operations.
@@ -28,7 +29,7 @@ public interface EventNavigationListener {
    * @param date the start date
    * @return the visible time period
    */
-  Interval onNavigateTo(ReadableDateTime date);
+  ReadableInterval onNavigateTo(ReadableDateTime date);
 
   /**
    * Gets the current interval.

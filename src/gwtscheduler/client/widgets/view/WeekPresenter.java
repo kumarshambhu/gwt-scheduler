@@ -99,8 +99,17 @@ public class WeekPresenter extends AbstractCalendarPresenter<AbstractDaysView> {
   }
 
   @Override
-  protected Duration getDurationPerCells(int count) {
+  public Duration getDurationPerCells(int count) {
     int minutesPerCell = (24 * 60) / getRowNum();
-    return new Period(0,minutesPerCell * count, 0,0).toStandardDuration();
+    return new Period(0, minutesPerCell * count, 0, 0).toStandardDuration();
   }
+
+  @Override
+  protected int[] getPositionForCellIndex(int index) {
+    assert index > 0 : "Index should be bigger than zero";
+    assert index < getColLength() * getRowLength() : "Index should be less than total number of cells";
+
+    return new int[] {index / getColLength(), index % getColLength()};
+  }
+
 }

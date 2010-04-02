@@ -1,9 +1,9 @@
-package gwtscheduler.tests.lasso;
+package gwtscheduler.lasso;
 
+import gwtscheduler.client.mockClasses.MockLassoSubject;
 import gwtscheduler.client.utils.lasso.GenericLassoStrategy;
 import gwtscheduler.client.utils.lasso.HorizontalLassoStrategy;
 import gwtscheduler.client.utils.lasso.VerticalLassoStrategy;
-import gwtscheduler.tests.mock.TestLassoSubject;
 
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -14,12 +14,12 @@ import org.junit.Test;
  */
 public class GenericLassoSelectionTests {
 
-  static TestLassoSubject subject;
+  static MockLassoSubject subject;
   static GenericLassoStrategy hStrat;
 
   @BeforeClass
   public static void setUp() {
-    subject = new TestLassoSubject(10, 10);
+    subject = new MockLassoSubject(10, 10);
     hStrat = new HorizontalLassoStrategy();
     hStrat = new VerticalLassoStrategy();
   }

@@ -40,7 +40,7 @@ public class EventsPanel extends AbstractGridOverlay implements WidgetResizeHand
    * @param eventSpan
    */
   public void addAppointment(AppointmentEvent evt, EventSpan eventSpan) {
-    Label label = new Label("" + evt.appointment.interval().toString());
+    Label label = new Label("<b>Event</b>");
     label.getElement().getStyle().setZIndex(Constants.EVENTS_ZINDEX);
     add(label);
 
@@ -65,15 +65,22 @@ public class EventsPanel extends AbstractGridOverlay implements WidgetResizeHand
     }
   }
 
+  @Override
+  public void clear() {
+    super.clear();
+    events.clear();
+    widgetSpans.clear();
+  }
+
   /**
    * positions the event.
    * @param event the event
    * @param w the widget
    */
   private void positionEvent(AppointmentEvent event, Widget w) {
-    //XXX implement
-    //    int[] from = calculateLeftTop(event.from);
-    //    setWidgetPositionImpl(w, from[0], from[1]);
+    EventSpan span = widgetSpans.get(w);
+    int[] coords = span.owner.getAbsolutePositionForCell(span.from);
+    setWidgetPositionImpl(w, coords[0], coords[1]);
   }
 
 }

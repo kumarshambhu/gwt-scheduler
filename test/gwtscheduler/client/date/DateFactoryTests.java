@@ -1,6 +1,6 @@
-package gwtscheduler.tests.gwt.date;
+package gwtscheduler.client.date;
 
-import static gwtscheduler.tests.gwt.TestUtils.assertInstantDate;
+import static gwtscheduler.client.TestUtils.assertInstantDate;
 import static org.goda.time.DateTimeConstants.AUGUST;
 import static org.goda.time.DateTimeConstants.DECEMBER;
 import static org.goda.time.DateTimeConstants.FEBRUARY;
@@ -10,6 +10,7 @@ import static org.goda.time.DateTimeConstants.JUNE;
 import static org.goda.time.DateTimeConstants.MARCH;
 import static org.goda.time.DateTimeConstants.NOVEMBER;
 import static org.goda.time.DateTimeConstants.OCTOBER;
+import gwtscheduler.client.AbstractClientTestCase;
 import gwtscheduler.client.modules.AppInjector;
 import gwtscheduler.client.modules.config.AppConfiguration;
 import gwtscheduler.client.widgets.common.navigation.DateGenerator;
@@ -21,13 +22,11 @@ import org.goda.time.MutableDateTime;
 import org.junit.Before;
 import org.junit.Test;
 
-import com.google.gwt.junit.client.GWTTestCase;
-
 /**
  * Test case for date factory.
  * @author malp
  */
-public class DateFactoryTests extends GWTTestCase {
+public class DateFactoryTests extends AbstractClientTestCase {
 
   DateGenerator dayf;
   DateGenerator weekf;
@@ -36,14 +35,10 @@ public class DateFactoryTests extends GWTTestCase {
   DateTime now;
   AppConfiguration config;
 
-  @Override
-  public String getModuleName() {
-    return "gwtscheduler.Tests";
-  }
-
   @Before
   @Override
-  public void gwtSetUp() {
+  public void gwtSetUp() throws Exception {
+    super.gwtSetUp();
     config = AppInjector.GIN.getInjector().getConfiguration();
 
     now = new DateTime();

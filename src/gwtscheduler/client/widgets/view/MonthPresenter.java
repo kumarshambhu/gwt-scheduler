@@ -66,11 +66,11 @@ public class MonthPresenter extends AbstractCalendarPresenter<MonthDisplay> impl
     return prev;
   }
 
-  public Interval onNavigateTo(ReadableDateTime date) {
+  public ReadableInterval onNavigateTo(ReadableDateTime date) {
     if (!date.equals(getFactory().current())) {
       getFactory().init(IntervalType.MONTH, date);
     }
-    Interval intv = getFactory().interval();
+    ReadableInterval intv = getFactory().interval();
     adjustVisibleRows(intv);
     decorator.decorate(intv, getDisplay().getDecorables());
     return intv;
@@ -90,15 +90,15 @@ public class MonthPresenter extends AbstractCalendarPresenter<MonthDisplay> impl
    * Adjusts the number of visible rows, according to the weeks.
    * @param intv the interval that is to show
    */
-  protected void adjustVisibleRows(Interval intv) {
+  protected void adjustVisibleRows(ReadableInterval intv) {
     //must show the necessary rows only
     int weeks = (Days.daysIn(intv).getDays() + 1) / WeekSize;
     getDisplay().showRows(weeks);
   }
 
   @Override
-  protected Duration getDurationPerCells(int count) {
-    return new Period(count, PeriodType.days()).toStandardDuration();
+  public Duration getDurationPerCells(int count) {
+    return new Period(1000 * 60 * 60 * 24, PeriodType.days()).toStandardDuration();
   }
 
   /**
@@ -115,6 +115,14 @@ public class MonthPresenter extends AbstractCalendarPresenter<MonthDisplay> impl
   }
 
   @Override
+  protected int[] getPositionForCellIndex(int index) {
+    assert index > 0 : "Index should be bigger than zero";
+    assert index < getRowLength() * getColLength() : "Index should be less than total number of cells";
+
+    return new int[] {index / getRowLength(), index % getRowLength()};
+  }
+
+  @Override
   public int getHeight() {
     return getDisplay().getHeight();
   }
@@ -122,6 +130,14 @@ public class MonthPresenter extends AbstractCalendarPresenter<MonthDisplay> impl
   @Override
   public int getWidth() {
     return getDisplay().getWidth();
+  }
+
+  /**
+   * Allows override of decorator.
+   * @param decorator
+   */
+  public void setDecorator(MultipleElementsIntervalDecorator decorator) {
+    this.decorator = decorator;
   }
 
 }

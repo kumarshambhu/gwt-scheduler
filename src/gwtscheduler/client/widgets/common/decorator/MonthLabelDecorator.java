@@ -9,8 +9,8 @@ import java.util.List;
 
 import org.goda.time.DateTime;
 import org.goda.time.Days;
-import org.goda.time.Interval;
 import org.goda.time.Period;
+import org.goda.time.ReadableInterval;
 
 import com.google.gwt.user.client.Element;
 
@@ -32,7 +32,7 @@ public class MonthLabelDecorator implements MultipleElementsIntervalDecorator {
     WeekDays = AppInjector.GIN.getInjector().getConfiguration().daysInWeek();
   }
 
-  public void decorate(Interval interval, HasMultipleDecorables<Element> decorable) {
+  public void decorate(ReadableInterval interval, HasMultipleDecorables<Element> decorable) {
     Period p = new Period(0, 0, 0, WeekDays, 0, 0, 0, 0);
     decorateHorizontal(interval.getStart(), p, decorable.getColumnsDecorableElements());
     decorateDays(interval, decorable.getContentDecorableElements());
@@ -66,7 +66,7 @@ public class MonthLabelDecorator implements MultipleElementsIntervalDecorator {
    * @param interval the interval
    * @param elems the elements
    */
-  private void decorateDays(Interval interval, List<Cell<Element>> elems) {
+  private void decorateDays(ReadableInterval interval, List<Cell<Element>> elems) {
     if (elems == null) {
       return;
     }

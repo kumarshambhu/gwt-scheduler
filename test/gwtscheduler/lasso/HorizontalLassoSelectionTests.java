@@ -1,10 +1,11 @@
-package gwtscheduler.tests.lasso;
+package gwtscheduler.lasso;
 
-import static junit.framework.Assert.*;
-import static gwtscheduler.tests.gwt.TestUtils.*;
+import static gwtscheduler.client.TestUtils.assertEqualPoints;
+import static junit.framework.Assert.assertEquals;
+import static junit.framework.Assert.assertTrue;
+import gwtscheduler.client.mockClasses.MockLassoSubject;
 import gwtscheduler.client.utils.lasso.GenericLassoStrategy;
 import gwtscheduler.client.utils.lasso.HorizontalLassoStrategy;
-import gwtscheduler.tests.mock.TestLassoSubject;
 
 import java.util.List;
 
@@ -17,12 +18,12 @@ import org.junit.Test;
  */
 public class HorizontalLassoSelectionTests {
 
-  static TestLassoSubject subject;
+  static MockLassoSubject subject;
   static GenericLassoStrategy hStrat;
 
   @BeforeClass
   public static void setUp() {
-    subject = new TestLassoSubject(10, 10);
+    subject = new MockLassoSubject(10, 10);
     hStrat = new HorizontalLassoStrategy();
   }
 

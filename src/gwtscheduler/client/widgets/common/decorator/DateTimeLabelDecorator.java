@@ -7,8 +7,8 @@ import gwtscheduler.client.widgets.common.decoration.MultipleElementsIntervalDec
 import java.util.List;
 
 import org.goda.time.DateTime;
-import org.goda.time.Interval;
 import org.goda.time.Period;
+import org.goda.time.ReadableInterval;
 
 import com.google.gwt.user.client.Element;
 
@@ -21,7 +21,7 @@ public class DateTimeLabelDecorator implements MultipleElementsIntervalDecorator
   /** used to decide if vertical redraw is needed */
   boolean hasRunVertical = false;
 
-  public void decorate(Interval interval, HasMultipleDecorables<Element> d) {
+  public void decorate(ReadableInterval interval, HasMultipleDecorables<Element> d) {
     int days = interval.toPeriod().toStandardDays().getDays();
     Period p = new Period(0, 0, 0, days, 0, 0, 0, 0);
     Period day = new Period(0, 0, 0, 1, 0, 0, 0, 0);
