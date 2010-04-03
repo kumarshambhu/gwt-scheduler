@@ -1,10 +1,12 @@
 package gwtscheduler.client.modules;
 
+import gwtscheduler.client.framework.DefaultEventBus;
+import gwtscheduler.client.framework.EventBus;
 import gwtscheduler.client.modules.annotation.Day;
 import gwtscheduler.client.modules.annotation.Month;
 import gwtscheduler.client.modules.annotation.Week;
-import gwtscheduler.client.modules.views.DefaultUIRegistry;
 import gwtscheduler.client.modules.views.CalendarMainView;
+import gwtscheduler.client.modules.views.DefaultUIRegistry;
 import gwtscheduler.client.modules.views.UIManager;
 import gwtscheduler.client.utils.GenericDateGenerator;
 import gwtscheduler.client.widgets.common.CalendarPresenter;
@@ -23,8 +25,6 @@ import gwtscheduler.client.widgets.view.dayweek.DayView;
 import gwtscheduler.client.widgets.view.dayweek.WeekView;
 import gwtscheduler.client.widgets.view.month.MonthDisplay;
 import gwtscheduler.client.widgets.view.month.MonthView;
-import net.customware.gwt.presenter.client.DefaultEventBus;
-import net.customware.gwt.presenter.client.EventBus;
 
 import com.google.gwt.inject.client.AbstractGinModule;
 import com.google.inject.Singleton;

@@ -1,5 +1,6 @@
 package gwtscheduler.client.widgets.view;
 
+import gwtscheduler.client.framework.EventBus;
 import gwtscheduler.client.modules.annotation.Month;
 import gwtscheduler.client.modules.config.AppConfiguration;
 import gwtscheduler.client.utils.lasso.HorizontalLassoStrategy;
@@ -9,7 +10,6 @@ import gwtscheduler.client.widgets.common.navigation.CalendarNavigationEvent;
 import gwtscheduler.client.widgets.view.common.AbstractCalendarPresenter;
 import gwtscheduler.client.widgets.view.month.MonthDisplay;
 import gwtscheduler.common.calendar.IntervalType;
-import net.customware.gwt.presenter.client.EventBus;
 
 import org.goda.time.Days;
 import org.goda.time.Duration;

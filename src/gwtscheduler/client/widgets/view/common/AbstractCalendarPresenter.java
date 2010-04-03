@@ -1,5 +1,7 @@
 package gwtscheduler.client.widgets.view.common;
 
+import gwtscheduler.client.framework.EventBus;
+import gwtscheduler.client.framework.mvp.WidgetPresenter;
 import gwtscheduler.client.widgets.common.CalendarPresenter;
 import gwtscheduler.client.widgets.common.ComplexGrid;
 import gwtscheduler.client.widgets.common.GenericCalendarDisplay;
@@ -9,10 +11,6 @@ import gwtscheduler.client.widgets.common.navigation.CalendarNavigationHandler;
 import gwtscheduler.client.widgets.common.navigation.DateGenerator;
 import gwtscheduler.client.widgets.view.events.EventSpan;
 import gwtscheduler.client.widgets.view.events.EventsMediator;
-import net.customware.gwt.presenter.client.EventBus;
-import net.customware.gwt.presenter.client.place.Place;
-import net.customware.gwt.presenter.client.place.PlaceRequest;
-import net.customware.gwt.presenter.client.widget.WidgetPresenter;
 
 import org.goda.time.DateTime;
 import org.goda.time.Duration;
@@ -87,11 +85,6 @@ public abstract class AbstractCalendarPresenter<T extends GenericCalendarDisplay
   /**
    * Presenter methods.
    */
-
-  @Override
-  public Place getPlace() {
-    return null;
-  }
 
   @Override
   public Widget getWidgetDisplay() {
@@ -215,20 +208,9 @@ public abstract class AbstractCalendarPresenter<T extends GenericCalendarDisplay
   }
 
   @Override
-  protected void onPlaceRequest(PlaceRequest request) {
-  }
-
-  @Override
   protected void onUnbind() {
   }
 
-  @Override
-  public void refreshDisplay() {
-  }
-
-  @Override
-  public void revealDisplay() {
-  }
 
   /********************************************************
    * Setters for testing. These are not actually used live

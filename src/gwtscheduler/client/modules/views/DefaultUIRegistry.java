@@ -1,5 +1,6 @@
 package gwtscheduler.client.modules.views;
 
+import gwtscheduler.client.framework.EventBus;
 import gwtscheduler.client.modules.annotation.Day;
 import gwtscheduler.client.modules.annotation.Month;
 import gwtscheduler.client.modules.annotation.Week;
@@ -10,8 +11,6 @@ import gwtscheduler.client.widgets.common.navigation.HasCalendarNavigationHandle
 
 import java.util.ArrayList;
 import java.util.List;
-
-import net.customware.gwt.presenter.client.EventBus;
 
 import org.goda.time.ReadableDateTime;
 

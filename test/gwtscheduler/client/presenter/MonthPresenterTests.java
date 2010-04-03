@@ -2,12 +2,12 @@ package gwtscheduler.client.presenter;
 
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
+import gwtscheduler.client.framework.DefaultEventBus;
 import gwtscheduler.client.modules.config.AppConfiguration;
 import gwtscheduler.client.widgets.common.decoration.MultipleElementsIntervalDecorator;
 import gwtscheduler.client.widgets.common.navigation.DateGenerator;
 import gwtscheduler.client.widgets.view.MonthCalendarPresenter;
 import gwtscheduler.client.widgets.view.month.MonthDisplay;
-import net.customware.gwt.presenter.client.DefaultEventBus;
 
 import org.goda.time.ReadableDateTime;
 import org.junit.Before;

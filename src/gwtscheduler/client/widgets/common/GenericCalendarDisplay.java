@@ -1,12 +1,11 @@
 package gwtscheduler.client.widgets.common;
 
+import gwtscheduler.client.framework.mvp.WidgetDisplay;
 import gwtscheduler.client.widgets.common.decoration.HasMultipleDecorables;
 import gwtscheduler.client.widgets.common.event.AppointmentEvent;
 import gwtscheduler.client.widgets.view.events.EventSpan;
 
 import java.util.List;
-
-import net.customware.gwt.presenter.client.widget.WidgetDisplay;
 
 import com.google.gwt.user.client.Element;
 

@@ -1,9 +1,9 @@
 package gwtscheduler.client.mockClasses;
 
+import gwtscheduler.client.framework.mvp.Display;
 import gwtscheduler.client.widgets.common.CalendarPresenter;
 import gwtscheduler.client.widgets.common.ComplexGrid;
 import gwtscheduler.client.widgets.common.navigation.CalendarNavigationHandler;
-import net.customware.gwt.presenter.client.Display;
 
 import org.goda.time.DateTime;
 import org.goda.time.Instant;
@@ -129,14 +129,6 @@ public class MockDateTimeAwarePresenter implements ComplexGrid, CalendarPresente
   @Override
   public Display getDisplay() {
     return null;
-  }
-
-  @Override
-  public void refreshDisplay() {
-  }
-
-  @Override
-  public void revealDisplay() {
   }
 
   @Override

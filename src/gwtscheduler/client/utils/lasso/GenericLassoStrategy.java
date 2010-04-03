@@ -1,8 +1,8 @@
 package gwtscheduler.client.utils.lasso;
 
 import gwtscheduler.client.utils.PointUtils;
-import gwtscheduler.client.widgets.common.LassoStrategy;
 import gwtscheduler.client.widgets.common.ComplexGrid;
+import gwtscheduler.client.widgets.common.LassoStrategy;
 
 import java.util.ArrayList;
 import java.util.List;

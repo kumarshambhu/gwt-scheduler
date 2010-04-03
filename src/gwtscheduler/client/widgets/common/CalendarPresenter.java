@@ -1,7 +1,7 @@
 package gwtscheduler.client.widgets.common;
 
+import gwtscheduler.client.framework.mvp.Presenter;
 import gwtscheduler.client.widgets.common.navigation.CalendarNavigationHandler;
-import net.customware.gwt.presenter.client.Presenter;
 
 import org.goda.time.Instant;
 import org.goda.time.Interval;

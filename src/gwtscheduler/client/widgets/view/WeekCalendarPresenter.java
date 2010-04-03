@@ -1,5 +1,6 @@
 package gwtscheduler.client.widgets.view;
 
+import gwtscheduler.client.framework.EventBus;
 import gwtscheduler.client.modules.AppInjector;
 import gwtscheduler.client.modules.annotation.Week;
 import gwtscheduler.client.modules.config.AppConfiguration;
@@ -9,7 +10,6 @@ import gwtscheduler.client.widgets.common.navigation.CalendarNavigationEvent;
 import gwtscheduler.client.widgets.view.common.AbstractCalendarPresenter;
 import gwtscheduler.client.widgets.view.dayweek.AbstractDaysView;
 import gwtscheduler.common.calendar.IntervalType;
-import net.customware.gwt.presenter.client.EventBus;
 
 import org.goda.time.Duration;
 import org.goda.time.Instant;
