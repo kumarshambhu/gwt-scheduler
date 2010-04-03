@@ -3,7 +3,7 @@ package gwtscheduler.client.modules;
 import gwtscheduler.client.modules.config.AppConfiguration;
 import gwtscheduler.client.modules.views.UIManager;
 import gwtscheduler.client.widgets.common.navigation.DateGenerator;
-import gwtscheduler.client.widgets.common.navigation.DateViewsTabPanel;
+import gwtscheduler.client.widgets.common.navigation.TabPanelMainView;
 import net.customware.gwt.presenter.client.EventBus;
 
 import com.google.gwt.core.client.GWT;
@@ -22,7 +22,7 @@ public interface AppInjector extends Ginjector {
   /**
    * @return
    */
-  DateViewsTabPanel getMainPanel();
+  TabPanelMainView getMainPanel();
 
   /**
    * Gets a new date generator instance.

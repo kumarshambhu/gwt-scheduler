@@ -2,13 +2,14 @@ package gwtscheduler.client.mockClasses;
 
 import gwtscheduler.client.widgets.common.CalendarPresenter;
 import gwtscheduler.client.widgets.common.ComplexGrid;
-import gwtscheduler.client.widgets.common.navigation.EventNavigationListener;
+import gwtscheduler.client.widgets.common.navigation.CalendarNavigationHandler;
 import net.customware.gwt.presenter.client.Display;
 
 import org.goda.time.DateTime;
 import org.goda.time.Instant;
 import org.goda.time.Interval;
 import org.goda.time.MutableDateTime;
+import org.goda.time.ReadableDateTime;
 import org.goda.time.ReadableInterval;
 
 import com.google.gwt.user.client.ui.Widget;
@@ -88,12 +89,27 @@ public class MockDateTimeAwarePresenter implements ComplexGrid, CalendarPresente
   }
 
   @Override
-  public void forceLayout() {
+  public CalendarNavigationHandler getCalendarNavigationHandler() {
+    return null;
   }
 
   @Override
-  public EventNavigationListener getNavigationListener() {
+  public Interval getCurrentInterval() {
     return null;
+  }
+
+  @Override
+  public Interval getNextInterval(ReadableDateTime navDate) {
+    return null;
+  }
+
+  @Override
+  public Interval getPreviousInterval(ReadableDateTime navDate) {
+    return null;
+  }
+
+  @Override
+  public void forceLayout() {
   }
 
   @Override

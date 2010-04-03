@@ -1,10 +1,11 @@
 package gwtscheduler.client.widgets.common;
 
+import gwtscheduler.client.widgets.common.navigation.CalendarNavigationHandler;
+import net.customware.gwt.presenter.client.Presenter;
+
 import org.goda.time.Instant;
 import org.goda.time.Interval;
-
-import gwtscheduler.client.widgets.common.navigation.EventNavigationListener;
-import net.customware.gwt.presenter.client.Presenter;
+import org.goda.time.ReadableDateTime;
 
 import com.google.gwt.user.client.ui.Widget;
 
@@ -22,10 +23,10 @@ public interface CalendarPresenter extends Presenter {
   String getTabLabel();
 
   /**
-   * Gets the navigation events listener.
-   * @return the listener
+   * Gets the navigation events handler.
+   * @return the handler
    */
-  EventNavigationListener getNavigationListener();
+  CalendarNavigationHandler getCalendarNavigationHandler();
 
   /**
    * Gets the widget.
@@ -61,5 +62,27 @@ public interface CalendarPresenter extends Presenter {
    *         current presenting date range
    */
   boolean isWithinDateRange(Interval interval);
+
+  /**
+   * Gets the current interval.
+   * @return the current interval
+   */
+  Interval getCurrentInterval();
+
+  /**
+   * Returns the previous instant for the supplied date, according to this
+   * presenter's properties.
+   * @param navDate the nav date
+   * @return the previous date
+   */
+  Interval getPreviousInterval(ReadableDateTime navDate);
+
+  /**
+   * Returns the next date for the supplied date, according to this presenter's
+   * properties.
+   * @param navDate the nav date
+   * @return the next date
+   */
+  Interval getNextInterval(ReadableDateTime navDate);
 
 }

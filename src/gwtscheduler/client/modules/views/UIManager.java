@@ -22,17 +22,7 @@ public interface UIManager {
    * Adds a new controller.
    * @param provider the controller
    */
-  void addController(CalendarPresenter controller);
-
-  /**
-   * Fires the back navigation event.
-   */
-  void fireBackNavigation();
-
-  /**
-   * Fires the forward navigation event.
-   */
-  void fireForwardNavigation();
+  void addPresenter(CalendarPresenter controller);
 
   /**
    * Fires the navigation event that goes to a specific date.

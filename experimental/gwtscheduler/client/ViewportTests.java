@@ -3,8 +3,10 @@ package gwtscheduler.client;
 import gwtscheduler.client.modules.AppInjector;
 import gwtscheduler.client.modules.views.UIManager;
 import gwtscheduler.client.resources.Resources;
-import gwtscheduler.client.widgets.common.navigation.DateViewsTabPanel;
+import gwtscheduler.client.widgets.common.CalendarPresenter;
+import gwtscheduler.client.widgets.common.navigation.TabPanelMainView;
 
+import org.goda.time.Interval;
 import org.goda.time.MutableDateTime;
 import org.goda.time.ReadableDateTime;
 
@@ -21,6 +23,7 @@ import com.google.gwt.user.client.ui.RootPanel;
 public class ViewportTests implements EntryPoint, ClickHandler {
 
   Button back, forward, today;
+  TabPanelMainView main;
 
   /**
    * This is the entry point method.
@@ -32,11 +35,7 @@ public class ViewportTests implements EntryPoint, ClickHandler {
     final AppInjector uiResources = AppInjector.GIN.getInjector();
     final UIManager registry = uiResources.getUIRegistry();
 
-    DateViewsTabPanel main = uiResources.getMainPanel();
-    //    DateViewsTabPanel main = new DateViewsTabPanel();
-    //    for (CalendarPresenter controller : registry.getControllers()) {
-    //      main.add(controller);
-    //    }
+    main = uiResources.getMainPanel();
 
     back = new Button("&laquo;", this);
     forward = new Button("&raquo;", this);
@@ -49,9 +48,14 @@ public class ViewportTests implements EntryPoint, ClickHandler {
     RootPanel.get("nav").add(nav);
     RootPanel.get("main").add(main);
     main.selectTab(0);
+
     registry.fireDateNavigation(getCurrentDate());
   }
 
+  /**
+   * Gets the current date.
+   * @return the current date
+   */
   protected ReadableDateTime getCurrentDate() {
     MutableDateTime start = new MutableDateTime();
     start.setHourOfDay(0);
@@ -65,13 +69,20 @@ public class ViewportTests implements EntryPoint, ClickHandler {
     AppInjector uiResources = AppInjector.GIN.getInjector();
     UIManager registry = uiResources.getUIRegistry();
 
+    CalendarPresenter curr = main.getCurrentPresenter();
+    ReadableDateTime navDate = getCurrentDate();
+
     if (event.getSource() == back) {
-      registry.fireBackNavigation();
+      Interval i = curr.getPreviousInterval(navDate);
+      navDate = i.getStart();
     } else if (event.getSource() == forward) {
-      registry.fireForwardNavigation();
+      Interval i = curr.getNextInterval(navDate);
+      navDate = i.getStart();
     } else if (event.getSource() == today) {
-      registry.fireDateNavigation(getCurrentDate());
+      //no need
     }
+
+    registry.fireDateNavigation(navDate);
 
   }
 }

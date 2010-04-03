@@ -4,6 +4,7 @@ import gwtscheduler.client.modules.annotation.Day;
 import gwtscheduler.client.modules.config.AppConfiguration;
 import gwtscheduler.client.utils.lasso.VerticalLassoStrategy;
 import gwtscheduler.client.widgets.common.decoration.MultipleElementsIntervalDecorator;
+import gwtscheduler.client.widgets.common.navigation.CalendarNavigationEvent;
 import gwtscheduler.client.widgets.view.common.AbstractCalendarPresenter;
 import gwtscheduler.client.widgets.view.dayweek.AbstractDaysView;
 import gwtscheduler.common.calendar.IntervalType;
@@ -58,26 +59,15 @@ public class DayCalendarPresenter extends AbstractCalendarPresenter<AbstractDays
   public int getRowNum() {
     return rows;
   }
-
-  public Interval onNavigateNext() {
-    Interval tp = getFactory().next().interval();
-    decorator.decorate(tp, getDisplay().getDecorables());
-    return tp;
-  }
-
-  public Interval onNavigatePrevious() {
-    Interval period = getFactory().previous().interval();
-    decorator.decorate(period, getDisplay().getDecorables());
-    return period;
-  }
-
-  public Interval onNavigateTo(ReadableDateTime date) {
+  
+  @Override
+  public void onCalendarNavigation(CalendarNavigationEvent calendarNavigationEvent) {
+    ReadableDateTime date = calendarNavigationEvent.date;
     if (!date.equals(getFactory().current())) {
       getFactory().init(IntervalType.DAY, date);
     }
     Interval period = getFactory().interval();
     decorator.decorate(period, getDisplay().getDecorables());
-    return period;
   }
 
   @Override

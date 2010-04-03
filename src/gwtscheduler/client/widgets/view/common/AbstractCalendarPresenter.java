@@ -5,8 +5,8 @@ import gwtscheduler.client.widgets.common.ComplexGrid;
 import gwtscheduler.client.widgets.common.GenericCalendarDisplay;
 import gwtscheduler.client.widgets.common.event.AppointmentEvent;
 import gwtscheduler.client.widgets.common.event.AppointmentHandler;
+import gwtscheduler.client.widgets.common.navigation.CalendarNavigationHandler;
 import gwtscheduler.client.widgets.common.navigation.DateGenerator;
-import gwtscheduler.client.widgets.common.navigation.EventNavigationListener;
 import gwtscheduler.client.widgets.view.events.EventSpan;
 import gwtscheduler.client.widgets.view.events.EventsMediator;
 import net.customware.gwt.presenter.client.EventBus;
@@ -28,7 +28,7 @@ import com.google.inject.Inject;
  * @author malp
  */
 public abstract class AbstractCalendarPresenter<T extends GenericCalendarDisplay> extends WidgetPresenter<T> implements CalendarPresenter,
-    EventNavigationListener, ComplexGrid, AppointmentHandler {
+    CalendarNavigationHandler, ComplexGrid, AppointmentHandler {
 
   @Inject
   private DateGenerator factory;
@@ -47,6 +47,21 @@ public abstract class AbstractCalendarPresenter<T extends GenericCalendarDisplay
   @Override
   public Interval getCurrentInterval() {
     return getFactory().interval();
+  }
+
+  @Override
+  public CalendarNavigationHandler getCalendarNavigationHandler() {
+    return this;
+  }
+
+  @Override
+  public Interval getNextInterval(ReadableDateTime navDate) {
+    return getFactory().next().interval();
+  }
+
+  @Override
+  public Interval getPreviousInterval(ReadableDateTime navDate) {
+    return getFactory().previous().interval();
   }
 
   /**
@@ -76,11 +91,6 @@ public abstract class AbstractCalendarPresenter<T extends GenericCalendarDisplay
   @Override
   public Place getPlace() {
     return null;
-  }
-
-  @Override
-  public EventNavigationListener getNavigationListener() {
-    return this;
   }
 
   @Override

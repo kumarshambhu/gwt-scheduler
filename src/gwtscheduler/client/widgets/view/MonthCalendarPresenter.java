@@ -5,6 +5,7 @@ import gwtscheduler.client.modules.config.AppConfiguration;
 import gwtscheduler.client.utils.lasso.HorizontalLassoStrategy;
 import gwtscheduler.client.widgets.common.ComplexGrid;
 import gwtscheduler.client.widgets.common.decoration.MultipleElementsIntervalDecorator;
+import gwtscheduler.client.widgets.common.navigation.CalendarNavigationEvent;
 import gwtscheduler.client.widgets.view.common.AbstractCalendarPresenter;
 import gwtscheduler.client.widgets.view.month.MonthDisplay;
 import gwtscheduler.common.calendar.IntervalType;
@@ -13,7 +14,6 @@ import net.customware.gwt.presenter.client.EventBus;
 import org.goda.time.Days;
 import org.goda.time.Duration;
 import org.goda.time.Instant;
-import org.goda.time.Interval;
 import org.goda.time.MutableDateTime;
 import org.goda.time.Period;
 import org.goda.time.PeriodType;
@@ -52,28 +52,15 @@ public class MonthCalendarPresenter extends AbstractCalendarPresenter<MonthDispl
     return "Month";
   }
 
-  public Interval onNavigateNext() {
-    Interval next = getFactory().next().interval();
-    adjustVisibleRows(next);
-    decorator.decorate(next, getDisplay().getDecorables());
-    return next;
-  }
-
-  public Interval onNavigatePrevious() {
-    Interval prev = getFactory().previous().interval();
-    adjustVisibleRows(prev);
-    decorator.decorate(prev, getDisplay().getDecorables());
-    return prev;
-  }
-
-  public ReadableInterval onNavigateTo(ReadableDateTime date) {
+  @Override
+  public void onCalendarNavigation(CalendarNavigationEvent calendarNavigationEvent) {
+    ReadableDateTime date = calendarNavigationEvent.date;
     if (!date.equals(getFactory().current())) {
       getFactory().init(IntervalType.MONTH, date);
     }
     ReadableInterval intv = getFactory().interval();
     adjustVisibleRows(intv);
     decorator.decorate(intv, getDisplay().getDecorables());
-    return intv;
   }
 
   @Override

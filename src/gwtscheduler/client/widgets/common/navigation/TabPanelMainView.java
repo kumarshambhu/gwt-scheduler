@@ -3,7 +3,7 @@ package gwtscheduler.client.widgets.common.navigation;
 import gwtscheduler.client.modules.annotation.Day;
 import gwtscheduler.client.modules.annotation.Month;
 import gwtscheduler.client.modules.annotation.Week;
-import gwtscheduler.client.modules.views.MainView;
+import gwtscheduler.client.modules.views.CalendarMainView;
 import gwtscheduler.client.resources.Resources;
 import gwtscheduler.client.resources.css.DayWeekCssResource;
 import gwtscheduler.client.widgets.common.CalendarPresenter;
@@ -22,7 +22,7 @@ import com.google.inject.Inject;
  * @author malp
  */
 //TODO migrate to MVP
-public class DateViewsTabPanel extends Composite implements MainView, BeforeSelectionHandler<Integer>, SelectionHandler<Integer> {
+public class TabPanelMainView extends Composite implements CalendarMainView, BeforeSelectionHandler<Integer>, SelectionHandler<Integer> {
 
   /** static ref to css */
   protected static final DayWeekCssResource CSS = Resources.dayWeekCss();
@@ -31,6 +31,8 @@ public class DateViewsTabPanel extends Composite implements MainView, BeforeSele
   private DecoratedTabPanel impl;
   /** presenters array */
   private CalendarPresenter[] presenters;
+  /** curr sel index */
+  private int currIndex;
 
   /**
    * Default constructor.
@@ -39,7 +41,7 @@ public class DateViewsTabPanel extends Composite implements MainView, BeforeSele
    * @param month
    */
   @Inject
-  public DateViewsTabPanel(@Day CalendarPresenter day, @Week CalendarPresenter week, @Month CalendarPresenter month) {
+  public TabPanelMainView(@Day CalendarPresenter day, @Week CalendarPresenter week, @Month CalendarPresenter month) {
     impl = new DecoratedTabPanel();
     initWidget(impl);
     impl.addBeforeSelectionHandler(this);
@@ -49,6 +51,7 @@ public class DateViewsTabPanel extends Composite implements MainView, BeforeSele
     presenters[0] = day;
     presenters[1] = week;
     presenters[2] = month;
+
     add(day);
     add(week);
     add(month);
@@ -67,13 +70,14 @@ public class DateViewsTabPanel extends Composite implements MainView, BeforeSele
   }
 
   public void onBeforeSelection(BeforeSelectionEvent<Integer> event) {
-//    CalendarPresenter presenter = presenters[event.getItem()];
-//    presenter.forceLayout();
+    //    CalendarPresenter presenter = presenters[event.getItem()];
+    //    presenter.forceLayout();
   }
 
   @Override
   public void onSelection(SelectionEvent<Integer> event) {
-    CalendarPresenter presenter = presenters[event.getSelectedItem()];
+    currIndex = event.getSelectedItem();
+    CalendarPresenter presenter = presenters[currIndex];
     presenter.forceLayout();
   }
 
@@ -90,10 +94,19 @@ public class DateViewsTabPanel extends Composite implements MainView, BeforeSele
   }
 
   /**
+   * Gets the current displaying presenter
+   * @return the presenter
+   */
+  public CalendarPresenter getCurrentPresenter() {
+    return presenters[currIndex];
+  }
+
+  /**
    * Selects a tab.
    * @param i the tab index
    */
   public void selectTab(int i) {
     impl.selectTab(i);
   }
+
 }
