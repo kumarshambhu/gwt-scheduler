@@ -199,9 +199,9 @@ public abstract class AbstractCalendarPresenter<T extends GenericCalendarDisplay
     return new Interval(from, to);
   }
 
-  /********************************************************
-   * View Controller methods. These will be removed later.
-   *********************************************************/
+  /*******************
+   * Display methods. 
+   *******************/
 
   @Override
   protected void onBind() {

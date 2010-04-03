@@ -99,7 +99,7 @@ public class WeekCalendarPresenter extends AbstractCalendarPresenter<AbstractDay
     assert index >= 0 : "Index should not be negative";
     assert index <= getColLength() * getRowLength() : "Index should be less than total number of cells";
 
-    return new int[] {index / getColLength(), index % getColLength()};
+    return new int[] {index % getColLength(), index / getColLength()};
   }
 
 }
