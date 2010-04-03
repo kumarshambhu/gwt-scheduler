@@ -15,7 +15,6 @@ import net.customware.gwt.presenter.client.EventBus;
 
 import org.goda.time.ReadableDateTime;
 
-import com.google.gwt.event.shared.HandlerManager;
 import com.google.gwt.event.shared.HandlerRegistration;
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
@@ -29,8 +28,6 @@ public class DefaultUIRegistry implements UIManager, HasCalendarNavigationHandle
 
   /** holds the views data */
   private ArrayList<CalendarPresenter> views;
-  /** handler manager */
-  private HandlerManager handlerManager;
   /** event bus instance */
   private EventBus eventBus;
 
@@ -44,11 +41,10 @@ public class DefaultUIRegistry implements UIManager, HasCalendarNavigationHandle
   @Inject
   public DefaultUIRegistry(EventBus evtBus, @Day CalendarPresenter day, @Week CalendarPresenter week, @Month CalendarPresenter month) {
     eventBus = evtBus;
-    handlerManager = new HandlerManager(this);
     views = new ArrayList<CalendarPresenter>();
-    views.add(day);
-    views.add(week);
-    views.add(month);
+    addPresenter(day);
+    addPresenter(week);
+    addPresenter(month);
   }
 
   //TODO: navigation could be optimized, if the controller
@@ -56,19 +52,12 @@ public class DefaultUIRegistry implements UIManager, HasCalendarNavigationHandle
 
   public void addPresenter(CalendarPresenter presenter) {
     views.add(presenter);
+    addCalendarNavigationHandler(presenter.getCalendarNavigationHandler());
   }
 
   public List<CalendarPresenter> getControllers() {
     return views;
   }
-
-//  public void fireBackNavigation(ReadableDateTime date) {
-//    eventBus.fireEvent(new CalendarNavigationEvent(date));
-//  }
-//
-//  public void fireForwardNavigation(ReadableDateTime date) {
-//    eventBus.fireEvent(new CalendarNavigationEvent(date));
-//  }
 
   public void fireDateNavigation(ReadableDateTime date) {
     eventBus.fireEvent(new CalendarNavigationEvent(date));
@@ -76,7 +65,7 @@ public class DefaultUIRegistry implements UIManager, HasCalendarNavigationHandle
 
   @Override
   public HandlerRegistration addCalendarNavigationHandler(CalendarNavigationHandler handler) {
-    return handlerManager.addHandler(CalendarNavigationEvent.getType(), handler);
+    return eventBus.addHandler(CalendarNavigationEvent.getType(), handler);
   }
 
 }
