@@ -97,7 +97,7 @@ public class WeekCalendarPresenter extends AbstractCalendarPresenter<AbstractDay
   @Override
   protected int[] getPositionForCellIndex(int index) {
     assert index >= 0 : "Index should not be negative";
-    assert index < getColLength() * getRowLength() : "Index should be less than total number of cells";
+    assert index <= getColLength() * getRowLength() : "Index should be less than total number of cells";
 
     return new int[] {index / getColLength(), index % getColLength()};
   }
