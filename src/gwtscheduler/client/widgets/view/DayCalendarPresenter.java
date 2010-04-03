@@ -1,7 +1,6 @@
 package gwtscheduler.client.widgets.view;
 
-import gwtscheduler.client.modules.AppInjector;
-import gwtscheduler.client.modules.annotation.Week;
+import gwtscheduler.client.modules.annotation.Day;
 import gwtscheduler.client.modules.config.AppConfiguration;
 import gwtscheduler.client.utils.lasso.VerticalLassoStrategy;
 import gwtscheduler.client.widgets.common.decoration.MultipleElementsIntervalDecorator;
@@ -22,17 +21,17 @@ import com.google.inject.Inject;
 import com.google.inject.Singleton;
 
 /**
- * Week controller for week views.
+ * Controller for days view.
  * @author malp
  */
 @Singleton
-public class WeekPresenter extends AbstractCalendarPresenter<AbstractDaysView> {
+public class DayCalendarPresenter extends AbstractCalendarPresenter<AbstractDaysView> {
 
-  /** holds the number of rows within a day */
-  private final int rows;
+  /** number of rows */
+  public final int rows;
 
+  @Day
   @Inject
-  @Week
   protected MultipleElementsIntervalDecorator decorator;
 
   /**
@@ -40,20 +39,19 @@ public class WeekPresenter extends AbstractCalendarPresenter<AbstractDaysView> {
    * @param cfg the application configuration
    */
   @Inject
-  protected WeekPresenter(AppConfiguration cfg, @Week AbstractDaysView view, EventBus bus) {
+  protected DayCalendarPresenter(AppConfiguration cfg, @Day AbstractDaysView view, EventBus bus) {
     super(view, bus);
     rows = cfg.rowsInDay();
     getDisplay().initLasso(new VerticalLassoStrategy(false), this);
   }
 
   public String getTabLabel() {
-    return "Week";
+    return "Day";
   }
 
   @Override
   public int getColNum() {
-    return 7;
-
+    return 1;
   }
 
   @Override
@@ -75,26 +73,19 @@ public class WeekPresenter extends AbstractCalendarPresenter<AbstractDaysView> {
 
   public Interval onNavigateTo(ReadableDateTime date) {
     if (!date.equals(getFactory().current())) {
-      MutableDateTime copy = date.toMutableDateTime();
-      AppConfiguration cfg = AppInjector.GIN.getInjector().getConfiguration();
-      //adjust to first day of week
-      int firstDay = cfg.startDayOfWeek();
-      while (copy.getDayOfWeek() != firstDay) {
-        copy.addDays(-1);
-      }
-      getFactory().init(IntervalType.WEEK, copy);
+      getFactory().init(IntervalType.DAY, date);
     }
     Interval period = getFactory().interval();
     decorator.decorate(period, getDisplay().getDecorables());
     return period;
   }
 
+  @Override
   public Instant getInstantForCell(int[] start) {
     int distance = (start[1] * getRowNum()) + start[0];
     ReadableInterval curr = getCurrentInterval().toMutableInterval();
-    int minutesPerCell = (24 * 60) / getRowNum();
     MutableDateTime time = curr.getStart().toMutableDateTime();
-    time.addMinutes(minutesPerCell * distance);
+    time.add(getDurationPerCells(distance));
     return time.toInstant();
   }
 
@@ -105,11 +96,21 @@ public class WeekPresenter extends AbstractCalendarPresenter<AbstractDaysView> {
   }
 
   @Override
-  protected int[] getPositionForCellIndex(int index) {
-    assert index > 0 : "Index should be bigger than zero";
-    assert index < getColLength() * getRowLength() : "Index should be less than total number of cells";
+  public int getHeight() {
+    return getDisplay().getHeight();
+  }
 
-    return new int[] {index / getColLength(), index % getColLength()};
+  @Override
+  public int getWidth() {
+    return getDisplay().getWidth();
+  }
+
+  @Override
+  protected int[] getPositionForCellIndex(int index) {
+    assert index >= 0 : "Index should not be negative";
+    assert index < getColLength() : "Index should be less than total number of cells";
+
+    return new int[] {index, 0};
   }
 
 }

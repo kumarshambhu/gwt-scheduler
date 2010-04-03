@@ -2,22 +2,22 @@ package gwtscheduler.client.widgets.view.events;
 
 import gwtscheduler.client.utils.Constants;
 import gwtscheduler.client.widgets.common.event.AppointmentEvent;
-import gwtscheduler.client.widgets.common.event.WidgetResizeEvent;
-import gwtscheduler.client.widgets.common.event.WidgetResizeHandler;
 import gwtscheduler.client.widgets.view.common.AbstractGridOverlay;
 
 import java.util.HashMap;
 import java.util.Map;
 
 import com.google.gwt.dom.client.Style.Position;
-import com.google.gwt.user.client.ui.Label;
+import com.google.gwt.user.client.Command;
+import com.google.gwt.user.client.DeferredCommand;
+import com.google.gwt.user.client.ui.HTML;
 import com.google.gwt.user.client.ui.Widget;
 
 /**
  * This class is responsible for displaying events.
  * @author malp
  */
-public class EventsPanel extends AbstractGridOverlay implements WidgetResizeHandler {
+public class EventsPanel extends AbstractGridOverlay  {
 
   /** holds appointmets and correspondent widgets */
   Map<AppointmentEvent, Widget> events;
@@ -40,29 +40,29 @@ public class EventsPanel extends AbstractGridOverlay implements WidgetResizeHand
    * @param eventSpan
    */
   public void addAppointment(AppointmentEvent evt, EventSpan eventSpan) {
-    Label label = new Label("<b>Event</b>");
-    label.getElement().getStyle().setZIndex(Constants.EVENTS_ZINDEX);
-    add(label);
+    Widget evtWidget = new HTML("<b>Event</b>");
+    evtWidget.getElement().getStyle().setZIndex(Constants.EVENTS_ZINDEX);
+    add(evtWidget);
 
-    events.put(evt, label);
-    widgetSpans.put(label, eventSpan);
+    events.put(evt, evtWidget);
+    widgetSpans.put(evtWidget, eventSpan);
 
-    positionEvent(evt, label);
+    positionEvent(evt, evtWidget);
   }
 
-  @Override
-  public void onResize(WidgetResizeEvent event) {
-    //redraw/resize all child events
-    super.onResize(event);
-  }
 
   /**
    * Forces the layout of this panel's elements
    */
   public void forceLayout() {
-    for (AppointmentEvent event : events.keySet()) {
-      positionEvent(event, events.get(event));
-    }
+    DeferredCommand.addCommand(new Command(){
+      @Override
+      public void execute() {
+        for (AppointmentEvent event : events.keySet()) {
+          positionEvent(event, events.get(event));
+        }
+      }
+    });
   }
 
   @Override
@@ -73,7 +73,7 @@ public class EventsPanel extends AbstractGridOverlay implements WidgetResizeHand
   }
 
   /**
-   * positions the event.
+   * Positions the appointment.
    * @param event the event
    * @param w the widget
    */

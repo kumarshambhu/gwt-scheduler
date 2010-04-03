@@ -42,7 +42,7 @@ public abstract class AbstractDaysPanel extends Composite implements HasWidgetRe
   @UiField
   SimplePanel simplePanel;
   /** Resize handler */
-  private WidgetResizeHandler rh;
+  WidgetResizeHandler rh;
 
   /** static ref to app configuration */
   private static final AppConfiguration config = AppInjector.GIN.getInjector().getConfiguration();
@@ -61,7 +61,7 @@ public abstract class AbstractDaysPanel extends Composite implements HasWidgetRe
     initWidget(uiBinder.createAndBindUi(this));
     rh = new HorizontalGridFillResizeHandler(grid);
 
-    int lh = config.daysLineHeightEMs();
+    int lh = config.rowsPerHour();
     container.setSize("100%", getRows() * lh + "em");
     grid.setSize("100%", getRows() * lh + "em");
   }

@@ -115,10 +115,10 @@ class MonthPanel extends Composite implements WidgetResizeHandler, HasWidgetResi
   public void onResize(WidgetResizeEvent event) {
     // we delegate to default handler
     handler.onResize(event);
-    //    setRowHeights();
     for (MonthRow row : monthRows) {
       row.onResize(event);
     }
+    fireEvent(event);
   }
 
   /**
@@ -228,6 +228,15 @@ class MonthPanel extends Composite implements WidgetResizeHandler, HasWidgetResi
    */
   int getRows() {
     return getVisibleRowsSize();
+  }
+
+  /**
+   * Gets the specified month row
+   * @param row the row index
+   * @return the month row
+   */
+  public MonthRow getMonthRow(int row) {
+    return monthRows.get(row);
   }
 
 }

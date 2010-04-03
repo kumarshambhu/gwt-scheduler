@@ -157,8 +157,6 @@ public abstract class AbstractCalendarPresenter<T extends GenericCalendarDisplay
    * @return the cell position in [row, column] format
    */
   protected int[] getCellPositionFor(ReadableDateTime date) {
-    assert getFactory().interval().contains(date) : "Date is outside of current interval";
-
     int count = 0;
     Duration cellDuration = getDurationPerCells(1);
     DateTime current = getFactory().interval().getStart();

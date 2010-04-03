@@ -104,8 +104,22 @@ public class MonthView extends Composite implements LassoAwarePanel.LassoHandler
   }
 
   @Override
+  public int getTitleHeight(int row, int col) {
+    MonthRow mr = monthPanel.getMonthRow(row);
+    Cell<Element> titleCell = mr.getTitleElements().get(col);
+    return titleCell.getCellElement().getOffsetHeight();
+  }
+
+  @Override
   public void forceLayout() {
     lassoAwarePanel.doDeferRedrawResize(new WidgetResizeEvent(), new WidgetRedrawEvent());
+  }
+
+  @Override
+  public void forceLayout(Widget lassoPanel, WidgetResizeEvent event) {
+    lassoPanel.setPixelSize(event.width, event.height);
+    eventsPanel.setPixelSize(event.width, event.height);
+    eventsPanel.forceLayout();
   }
 
   @Override
@@ -116,13 +130,6 @@ public class MonthView extends Composite implements LassoAwarePanel.LassoHandler
   @Override
   public int getRowNum() {
     return monthPanel.getRows();
-  }
-
-  @Override
-  public void forceLayout(Widget lassoPanel, WidgetResizeEvent event) {
-    lassoPanel.setPixelSize(event.width, event.height);
-    eventsPanel.setPixelSize(event.width, event.height);
-    eventsPanel.forceLayout();
   }
 
   public List<Cell<Element>> getColumnsDecorableElements() {

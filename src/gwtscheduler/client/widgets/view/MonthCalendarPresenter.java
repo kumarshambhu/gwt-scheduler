@@ -28,7 +28,7 @@ import com.google.inject.Singleton;
  * @author malp
  */
 @Singleton
-public class MonthPresenter extends AbstractCalendarPresenter<MonthDisplay> implements ComplexGrid {
+public class MonthCalendarPresenter extends AbstractCalendarPresenter<MonthDisplay> implements ComplexGrid {
 
   /** defines the number of days in a week */
   private final int WeekSize;
@@ -42,7 +42,7 @@ public class MonthPresenter extends AbstractCalendarPresenter<MonthDisplay> impl
    * @param cfg the application configuration
    */
   @Inject
-  public MonthPresenter(AppConfiguration cfg, @Month MonthDisplay display, EventBus bus) {
+  public MonthCalendarPresenter(AppConfiguration cfg, @Month MonthDisplay display, EventBus bus) {
     super(display, bus);
     WeekSize = cfg.daysInWeek();
     getDisplay().initLasso(new HorizontalLassoStrategy(), this);
@@ -116,20 +116,18 @@ public class MonthPresenter extends AbstractCalendarPresenter<MonthDisplay> impl
 
   @Override
   protected int[] getPositionForCellIndex(int index) {
-    assert index > 0 : "Index should be bigger than zero";
+    assert index >= 0 : "Index should not be negative";
     assert index < getRowLength() * getColLength() : "Index should be less than total number of cells";
 
     return new int[] {index / getRowLength(), index % getRowLength()};
   }
 
   @Override
-  public int getHeight() {
-    return getDisplay().getHeight();
-  }
-
-  @Override
-  public int getWidth() {
-    return getDisplay().getWidth();
+  public int[] getAbsolutePositionForCell(int[] cellPos) {
+    //we override this to take into account month cell labels
+    //so we add a slight offset to the returned position
+    int[] pos = super.getAbsolutePositionForCell(cellPos);
+    return new int[] {pos[0], pos[1] + getDisplay().getTitleHeight(cellPos[0], cellPos[1])};
   }
 
   /**

@@ -26,7 +26,7 @@ public interface AppConfiguration {
    * day/week view.
    * @return the number of lines that each cell occupies
    */
-  int daysLineHeightEMs();
+  int rowsPerHour();
 
   /**
    * Gets the number of rows for each day.

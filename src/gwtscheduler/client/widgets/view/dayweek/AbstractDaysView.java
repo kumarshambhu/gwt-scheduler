@@ -73,9 +73,9 @@ public abstract class AbstractDaysView extends Composite implements DaysDisplay,
   public AbstractDaysView() {
     initWidget(uiBinder.createAndBindUi(this));
     eventsPanel.setComplexGrid(this);
-    lassoAwarePanel.addWidgetResizeHandler(daysPanel.getWidgetResizeHandler());
     lassoAwarePanel.setOverflowY(true);
     lassoAwarePanel.setLassoHandler(this);
+    lassoAwarePanel.addWidgetResizeHandler(daysPanel.getWidgetResizeHandler());
   }
 
   /**
@@ -102,6 +102,7 @@ public abstract class AbstractDaysView extends Composite implements DaysDisplay,
 
       g.setWidget(0, 1 + i, DOMUtils.wrapElement(topCell.getCellElement()));
       g.getFlexCellFormatter().setHorizontalAlignment(0, 1 + i, HasHorizontalAlignment.ALIGN_CENTER);
+      g.getFlexCellFormatter().setWidth(0, 1 + i, ((float) 100 / columns) + "%");
     }
 
     return g;
@@ -153,8 +154,8 @@ public abstract class AbstractDaysView extends Composite implements DaysDisplay,
     }
 
     AppConfiguration config = AppInjector.GIN.getInjector().getConfiguration();
-    lassoPanel.setSize("100%", (config.daysLineHeightEMs() * daysPanel.getRows()) + "em");
-    eventsPanel.setSize("100%", (config.daysLineHeightEMs() * daysPanel.getRows()) + "em");
+    lassoPanel.setSize("100%", (config.rowsPerHour() * daysPanel.getRows()) + "em");
+    eventsPanel.setSize("100%", (config.rowsPerHour() * daysPanel.getRows()) + "em");
     eventsPanel.forceLayout();
   }
 

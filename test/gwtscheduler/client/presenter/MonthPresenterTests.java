@@ -6,7 +6,7 @@ import static org.mockito.Mockito.when;
 import gwtscheduler.client.modules.config.AppConfiguration;
 import gwtscheduler.client.widgets.common.decoration.MultipleElementsIntervalDecorator;
 import gwtscheduler.client.widgets.common.navigation.DateGenerator;
-import gwtscheduler.client.widgets.view.MonthPresenter;
+import gwtscheduler.client.widgets.view.MonthCalendarPresenter;
 import gwtscheduler.client.widgets.view.month.MonthDisplay;
 import net.customware.gwt.presenter.client.DefaultEventBus;
 
@@ -19,7 +19,7 @@ import org.junit.Test;
  */
 public class MonthPresenterTests  {
 
-  MonthPresenter presenter;
+  MonthCalendarPresenter presenter;
   AppConfiguration mockConfig;
   MonthDisplay mockDisplay;
   
@@ -39,7 +39,7 @@ public class MonthPresenterTests  {
     when(mockConfig.daysInWeek()).thenReturn(7);
     when(mockDisplay.getVisibleRows()).thenReturn(6);
 
-    presenter = new MonthPresenter(mockConfig, mockDisplay, new DefaultEventBus());
+    presenter = new MonthCalendarPresenter(mockConfig, mockDisplay, new DefaultEventBus());
     presenter.setFactory(mockGenerator);
     presenter.setDecorator(mock(MultipleElementsIntervalDecorator.class));
   }

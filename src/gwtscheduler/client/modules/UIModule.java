@@ -14,9 +14,9 @@ import gwtscheduler.client.widgets.common.decorator.MonthLabelDecorator;
 import gwtscheduler.client.widgets.common.event.GenericLassoElementFactory;
 import gwtscheduler.client.widgets.common.navigation.DateGenerator;
 import gwtscheduler.client.widgets.common.navigation.DateViewsTabPanel;
-import gwtscheduler.client.widgets.view.DayPresenter;
-import gwtscheduler.client.widgets.view.MonthPresenter;
-import gwtscheduler.client.widgets.view.WeekPresenter;
+import gwtscheduler.client.widgets.view.DayCalendarPresenter;
+import gwtscheduler.client.widgets.view.MonthCalendarPresenter;
+import gwtscheduler.client.widgets.view.WeekCalendarPresenter;
 import gwtscheduler.client.widgets.view.common.factory.LassoElementFactory;
 import gwtscheduler.client.widgets.view.dayweek.AbstractDaysView;
 import gwtscheduler.client.widgets.view.dayweek.DayView;
@@ -45,9 +45,9 @@ public class UIModule extends AbstractGinModule {
     bind(LassoElementFactory.class).to(GenericLassoElementFactory.class).in(Singleton.class);
 
     // controllers
-    bind(CalendarPresenter.class).annotatedWith(Day.class).to(DayPresenter.class);
-    bind(CalendarPresenter.class).annotatedWith(Week.class).to(WeekPresenter.class);
-    bind(CalendarPresenter.class).annotatedWith(Month.class).to(MonthPresenter.class);
+    bind(CalendarPresenter.class).annotatedWith(Day.class).to(DayCalendarPresenter.class);
+    bind(CalendarPresenter.class).annotatedWith(Week.class).to(WeekCalendarPresenter.class);
+    bind(CalendarPresenter.class).annotatedWith(Month.class).to(MonthCalendarPresenter.class);
 
     // decorators
     bind(MultipleElementsIntervalDecorator.class).annotatedWith(Day.class).to(DateTimeLabelDecorator.class);

@@ -20,4 +20,12 @@ public interface MonthDisplay extends GenericCalendarDisplay {
    */
   int getVisibleRows();
 
+  /**
+   * Gets the title height in pixels, for the specified cell
+   * @param row the row index
+   * @param col the col index
+   * @return the title bar height
+   */
+  int getTitleHeight(int row, int col);
+
 }

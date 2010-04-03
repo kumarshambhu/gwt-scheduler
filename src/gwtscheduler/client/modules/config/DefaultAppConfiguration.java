@@ -29,7 +29,7 @@ public class DefaultAppConfiguration implements AppConfiguration {
   }
 
   @Override
-  public int daysLineHeightEMs() {
+  public int rowsPerHour() {
     return 2;
   }
 
