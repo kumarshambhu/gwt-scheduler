@@ -1,6 +1,5 @@
 package gwtscheduler.client.widgets.common;
 
-
 /**
  * Defines a lasso component. The lasso component is responsible for drawing the
  * lasso selection on the screen.
@@ -21,15 +20,27 @@ public interface ComplexGrid {
   int getColNum();
 
   /**
-   * Gets the subject's width
-   * @return the width
+   * Gets the subject's width.
+   * @return the width in px
    */
   int getWidth();
 
   /**
-   * Gets the subject's height
-   * @return the height
+   * Gets the subject's height.
+   * @return the height in px
    */
   int getHeight();
+
+  /**
+   * Gets the effective width.
+   * @return the width in px
+   */
+  public int getEffectiveWidth();
+
+  /**
+   * Gets the effective height.
+   * @return the height in px
+   */
+  public int getEffectiveHeight();
 
 }

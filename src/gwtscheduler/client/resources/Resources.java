@@ -1,6 +1,6 @@
 package gwtscheduler.client.resources;
 
-import gwtscheduler.client.resources.css.CommonCssResourceBundle;
+import gwtscheduler.client.resources.css.AppResources;
 import gwtscheduler.client.resources.css.DayWeekCssResource;
 import gwtscheduler.client.resources.css.MonthCssResource;
 
@@ -17,7 +17,7 @@ import com.google.gwt.dom.client.StyleInjector;
 public final class Resources {
 
   /** Holds the common css resource */
-  private static CommonCssResourceBundle commonCss;
+  private static AppResources AppResources;
 
   /**
    * Injects all stylesheets.
@@ -32,8 +32,8 @@ public final class Resources {
    * Maybe initializes the css resources.
    */
   private static synchronized void maybeInitialize() {
-    if (commonCss == null) {
-      commonCss = GWT.create(CommonCssResourceBundle.class);
+    if (AppResources == null) {
+      AppResources = GWT.create(AppResources.class);
     }
   }
 
@@ -43,7 +43,7 @@ public final class Resources {
    */
   public static final DayWeekCssResource dayWeekCss() {
     maybeInitialize();
-    return commonCss.dayWeekCss();
+    return AppResources.dayWeekCss();
   }
 
   /**
@@ -52,7 +52,7 @@ public final class Resources {
    */
   public static final MonthCssResource monthCss() {
     maybeInitialize();
-    return commonCss.monthCss();
+    return AppResources.monthCss();
   }
 
 }

@@ -1,5 +1,6 @@
 package gwtscheduler.client.widgets.view.events;
 
+import gwtscheduler.client.resources.Resources;
 import gwtscheduler.client.utils.Constants;
 import gwtscheduler.client.widgets.common.event.AppointmentEvent;
 import gwtscheduler.client.widgets.view.common.AbstractGridOverlay;
@@ -17,12 +18,12 @@ import com.google.gwt.user.client.ui.Widget;
  * This class is responsible for displaying events.
  * @author malp
  */
-public class EventsPanel extends AbstractGridOverlay  {
+public abstract class EventsPanel extends AbstractGridOverlay {
 
   /** holds appointmets and correspondent widgets */
-  Map<AppointmentEvent, Widget> events;
+  protected Map<AppointmentEvent, Widget> events;
   /** bookeeping */
-  Map<Widget, EventSpan> widgetSpans;
+  protected Map<Widget, EventSpan> widgetSpans;
 
   /**
    * Default constructor.
@@ -40,7 +41,9 @@ public class EventsPanel extends AbstractGridOverlay  {
    * @param eventSpan
    */
   public void addAppointment(AppointmentEvent evt, EventSpan eventSpan) {
+    //TODO use a .gwt.xml template instead
     Widget evtWidget = new HTML("<b>Event</b>");
+    evtWidget.getElement().setClassName(Resources.dayWeekCss().eventElement());
     evtWidget.getElement().getStyle().setZIndex(Constants.EVENTS_ZINDEX);
     add(evtWidget);
 
@@ -48,18 +51,20 @@ public class EventsPanel extends AbstractGridOverlay  {
     widgetSpans.put(evtWidget, eventSpan);
 
     positionEvent(evt, evtWidget);
+    resizeEvent(evt, evtWidget);
   }
-
 
   /**
    * Forces the layout of this panel's elements
    */
   public void forceLayout() {
-    DeferredCommand.addCommand(new Command(){
+    DeferredCommand.addCommand(new Command() {
       @Override
       public void execute() {
         for (AppointmentEvent event : events.keySet()) {
-          positionEvent(event, events.get(event));
+          Widget widget = events.get(event);
+          positionEvent(event, widget);
+          resizeEvent(event, widget);
         }
       }
     });
@@ -75,12 +80,29 @@ public class EventsPanel extends AbstractGridOverlay  {
   /**
    * Positions the appointment.
    * @param event the event
-   * @param w the widget
+   * @param evtWidget the widget
    */
-  private void positionEvent(AppointmentEvent event, Widget w) {
-    EventSpan span = widgetSpans.get(w);
+  protected void positionEvent(AppointmentEvent event, Widget evtWidget) {
+    EventSpan span = widgetSpans.get(evtWidget);
     int[] coords = span.owner.getAbsolutePositionForCell(span.from);
-    setWidgetPositionImpl(w, coords[0], coords[1]);
+    setWidgetPositionImpl(evtWidget, coords[0], coords[1]);
+  }
+
+  /**
+   * Resizes the event
+   * @param event the event
+   * @param evtWidget the widget
+   */
+  protected void resizeEvent(AppointmentEvent event, Widget evtWidget) {
+    EventSpan span = widgetSpans.get(evtWidget);
+    float width = (float) span.owner.getEffectiveWidth() / span.owner.getColNum();
+    float height = (float) span.owner.getEffectiveHeight() / span.owner.getRowNum();
+
+    //TODO account for scroll bar
+    int rowspan = span.to[0] - span.from[0];
+    int colspan = span.to[1] - span.from[1] + 1;
+
+    evtWidget.setPixelSize((int) width * colspan, (int) height * rowspan);
   }
 
 }

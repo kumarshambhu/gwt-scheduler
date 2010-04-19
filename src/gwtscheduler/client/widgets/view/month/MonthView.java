@@ -3,7 +3,7 @@ package gwtscheduler.client.widgets.view.month;
 import gwtscheduler.client.modules.AppInjector;
 import gwtscheduler.client.modules.config.AppConfiguration;
 import gwtscheduler.client.resources.Resources;
-import gwtscheduler.client.resources.css.DayWeekCssResource;
+import gwtscheduler.client.resources.css.MonthCssResource;
 import gwtscheduler.client.utils.DOMUtils;
 import gwtscheduler.client.widgets.common.Cell;
 import gwtscheduler.client.widgets.common.ComplexGrid;
@@ -17,7 +17,7 @@ import gwtscheduler.client.widgets.common.event.WidgetResizeEvent;
 import gwtscheduler.client.widgets.view.common.LassoAwarePanel;
 import gwtscheduler.client.widgets.view.common.cell.BaseCell;
 import gwtscheduler.client.widgets.view.events.EventSpan;
-import gwtscheduler.client.widgets.view.events.EventsPanel;
+import gwtscheduler.client.widgets.view.events.MonthEventsPanel;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -42,7 +42,7 @@ public class MonthView extends Composite implements LassoAwarePanel.LassoHandler
     HasWidgetRedrawHandlers {
 
   /** static ref to css */
-  protected static final DayWeekCssResource CSS = Resources.dayWeekCss();
+  protected static final MonthCssResource CSS = Resources.monthCss();
 
   @UiField
   VerticalPanel impl;
@@ -53,7 +53,7 @@ public class MonthView extends Composite implements LassoAwarePanel.LassoHandler
   @UiField
   MonthPanel monthPanel;
   @UiField
-  EventsPanel eventsPanel;
+  MonthEventsPanel eventsPanel;
 
   /** top view cells */
   protected List<Cell<Element>> topLabels;
@@ -193,6 +193,16 @@ public class MonthView extends Composite implements LassoAwarePanel.LassoHandler
   @Override
   public int getWidth() {
     return monthPanel.getWidth();
+  }
+
+  @Override
+  public int getEffectiveWidth() {
+    return getWidth();
+  }
+
+  @Override
+  public int getEffectiveHeight() {
+    return getHeight() - ((CSS.lineHeight() + CSS.monthCellTitleBorderTopPx() + CSS.monthCellPadTopPx()) * getRowNum());
   }
 
   @Override

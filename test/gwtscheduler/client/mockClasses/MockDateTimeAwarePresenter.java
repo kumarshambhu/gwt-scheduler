@@ -61,6 +61,16 @@ public class MockDateTimeAwarePresenter implements ComplexGrid, CalendarPresente
   }
 
   @Override
+  public int getEffectiveHeight() {
+    return 100;
+  }
+
+  @Override
+  public int getEffectiveWidth() {
+    return 100;
+  }
+
+  @Override
   public Interval getIntervalForRange(int[] start, int[] end) {
     Instant from = getInstantForCell(start);
     Instant to = getInstantForCell(end);

@@ -18,6 +18,16 @@ public class DayView extends AbstractDaysView {
     return 1;
   }
 
+  @Override
+  public int getEffectiveWidth() {
+    return getWidth() - CSS.smallPaddingPx();
+  }
+
+  @Override
+  public int getEffectiveHeight() {
+    return getHeight();
+  }
+
   /**
    * Inner class for days panel.
    * @author malp

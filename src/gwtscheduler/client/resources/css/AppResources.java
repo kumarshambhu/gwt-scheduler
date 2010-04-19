@@ -8,20 +8,20 @@ import com.google.gwt.resources.client.ClientBundle;
  * @version $Revision: $
  * @since 1.0
  */
-public interface CommonCssResourceBundle extends ClientBundle {
+public interface AppResources extends ClientBundle {
 
   /**
    * This is the main stylesheet for days and weeks.
    * @return the day/week stylesheet resource
    */
-  @Source(value = {"st-common.css", "st-day-week.css"})
+  @Source(value = {"structural-common.css", "structural-day-week.css"})
   public DayWeekCssResource dayWeekCss();
 
   /**
    * This is the main stylesheet for months.
    * @return the month stylesheet resource
    */
-  @Source(value = {"st-common.css", "st-month.css"})
+  @Source(value = {"structural-common.css", "structural-month.css"})
   public MonthCssResource monthCss();
 
 }

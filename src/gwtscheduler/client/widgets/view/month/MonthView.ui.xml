@@ -15,7 +15,7 @@
 	<g:VerticalPanel ui:field="impl">
 		<g:FlexTable ui:field="header" />
 		<common:LassoAwarePanel ui:field="lassoAwarePanel">
-			<events:EventsPanel ui:field="eventsPanel" styleName="{style.eventsPanel}" />
+			<events:MonthEventsPanel ui:field="eventsPanel" styleName="{style.eventsPanel}" />
 			<month:MonthPanel ui:field="monthPanel" />
 		</common:LassoAwarePanel>
 	</g:VerticalPanel>

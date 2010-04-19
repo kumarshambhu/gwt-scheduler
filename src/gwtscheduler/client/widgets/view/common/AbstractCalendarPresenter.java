@@ -118,6 +118,14 @@ public abstract class AbstractCalendarPresenter<T extends GenericCalendarDisplay
     return getDisplay().getHeight();
   }
 
+  public int getEffectiveWidth() {
+    return getDisplay().getEffectiveWidth();
+  }
+
+  public int getEffectiveHeight() {
+    return getDisplay().getEffectiveHeight();
+  }
+
   /**
    * Gets the length of a row.
    * @return the row length
@@ -200,7 +208,7 @@ public abstract class AbstractCalendarPresenter<T extends GenericCalendarDisplay
   }
 
   /*******************
-   * Display methods. 
+   * Display methods.
    *******************/
 
   @Override
@@ -210,7 +218,6 @@ public abstract class AbstractCalendarPresenter<T extends GenericCalendarDisplay
   @Override
   protected void onUnbind() {
   }
-
 
   /********************************************************
    * Setters for testing. These are not actually used live
@@ -223,4 +230,5 @@ public abstract class AbstractCalendarPresenter<T extends GenericCalendarDisplay
   public void setFactory(DateGenerator factory) {
     this.factory = factory;
   }
+
 }

@@ -40,4 +40,14 @@ public class MockLassoSubject implements ComplexGrid {
     return 100;
   }
 
+  @Override
+  public int getEffectiveHeight() {
+    return 100;
+  }
+
+  @Override
+  public int getEffectiveWidth() {
+    return 100;
+  }
+
 }

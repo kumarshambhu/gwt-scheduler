@@ -39,3 +39,11 @@
 	/*fuck ie*/
 	/*filter: alpha(opacity = 50);*/
 }
+
+/**
+ * Events
+ */
+ .eventElement {
+ 	border: 1px solid black;
+ 	background-color: red;
+ }

@@ -39,6 +39,13 @@ public interface GenericCalendarDisplay extends WidgetDisplay, ComplexGrid {
   int getWidth();
 
   /**
+   * Gets the effective width in pixels, ie the width that is visibe and can
+   * hold some information.
+   * @return the effective width in px
+   */
+  int getEffectiveWidth();
+
+  /**
    * Gets the current visible elements.
    * @return a list of visible elements
    */

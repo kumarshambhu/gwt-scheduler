@@ -11,24 +11,32 @@ import com.google.gwt.resources.client.CssResource;
 interface CommonCssResource extends CssResource {
 
   /**
-   * Generic container .
+   * Generic container.
    * @return the css class for a generic container
    */
   String genericContainer();
 
   /**
-   * @return
+   * Gets the lasso panel class name.
+   * @return the css class for the lasso panel
    */
   String lassoPanel();
 
   /**
-   * @return
+   * Gets the lasso element class name.
+   * @return the css class for a lasso element
    */
   String lassoElement();
 
   /**
-   * Generic container padding.
-   * @return
+   * Gets the event element class name
+   * @return the css class for an event
+   */
+  String eventElement();
+
+  /**
+   * Gets the generic container padding.
+   * @return the generic container padding in pixels
    */
   int genericContainerPaddingPx();
 }

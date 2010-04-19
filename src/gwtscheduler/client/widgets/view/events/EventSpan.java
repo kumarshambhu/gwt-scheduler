@@ -14,9 +14,10 @@ public class EventSpan {
   public final int[] to;
 
   /**
-   * @param owner
-   * @param from
-   * @param to
+   * Default constructor.
+   * @param owner the presenter owner
+   * @param from the from grid pos
+   * @param to the to grid pos
    */
   public EventSpan(AbstractCalendarPresenter<?> owner, int[] from, int[] to) {
     this.owner = owner;

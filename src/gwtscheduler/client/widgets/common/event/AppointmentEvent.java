@@ -11,9 +11,9 @@ import com.google.gwt.event.shared.GwtEvent;
  * @version $Revision: $
  * @since 1.0
  */
+//TODO change to an interface or something more generic
 public class AppointmentEvent extends GwtEvent<AppointmentHandler> {
 
-  //TODO change to an interface
   public final CalendarPresenter owner;
   public final AbstractAppointment appointment;
 

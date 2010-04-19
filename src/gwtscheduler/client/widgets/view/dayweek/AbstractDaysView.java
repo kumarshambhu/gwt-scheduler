@@ -17,8 +17,8 @@ import gwtscheduler.client.widgets.common.event.WidgetRedrawHandler;
 import gwtscheduler.client.widgets.common.event.WidgetResizeEvent;
 import gwtscheduler.client.widgets.view.common.LassoAwarePanel;
 import gwtscheduler.client.widgets.view.common.cell.BaseCell;
+import gwtscheduler.client.widgets.view.events.DaysEventsPanel;
 import gwtscheduler.client.widgets.view.events.EventSpan;
-import gwtscheduler.client.widgets.view.events.EventsPanel;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -50,7 +50,7 @@ public abstract class AbstractDaysView extends Composite implements DaysDisplay,
   @UiField
   AbstractDaysPanel daysPanel;
   @UiField
-  EventsPanel eventsPanel;
+  DaysEventsPanel eventsPanel;
   @UiField
   LassoAwarePanel lassoAwarePanel;
 
