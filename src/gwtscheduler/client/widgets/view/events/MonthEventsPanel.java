@@ -20,9 +20,8 @@ public class MonthEventsPanel extends EventsPanel {
     float width = (float) span.owner.getEffectiveWidth() / span.owner.getColNum();
     float height = (float) span.owner.getEffectiveHeight() / span.owner.getRowNum();
 
-    //TODO account for scroll bar
-    int rowspan = span.to[0] - span.from[0]+1;
-    int colspan = span.to[1] - span.from[1];
+    int rowspan = span.to[0] - span.from[0] + 1;
+    int colspan = Math.max(span.to[1] - span.from[1], 1);
 
     evtWidget.setPixelSize((int) width * colspan, (int) height * rowspan);
   }

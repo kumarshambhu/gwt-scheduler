@@ -70,8 +70,8 @@ public abstract class AbstractCalendarPresenter<T extends GenericCalendarDisplay
   public void onAddEvent(AppointmentEvent evt) {
     Interval interval = evt.appointment.interval();
     if (isWithinDateRange(interval)) {
-      int[] from = getCellPositionFor(interval.getStart());
-      int[] to = getCellPositionFor(interval.getEnd());
+      int[] from = getCellPositionFor(interval.getStart(), true);
+      int[] to = getCellPositionFor(interval.getEnd(), false);
       EventSpan eventSpan = new EventSpan(this, from, to);
       getDisplay().addAppointment(evt, eventSpan);
     }
@@ -165,9 +165,10 @@ public abstract class AbstractCalendarPresenter<T extends GenericCalendarDisplay
   /**
    * Gets a cell position for a given date.
    * @param date the date
+   * @param include <code>true</code> to include the date
    * @return the cell position in [row, column] format
    */
-  protected int[] getCellPositionFor(ReadableDateTime date) {
+  protected int[] getCellPositionFor(ReadableDateTime date, boolean include) {
     int count = 0;
     Duration cellDuration = getDurationPerCells(1);
     DateTime current = getFactory().interval().getStart();
@@ -180,7 +181,7 @@ public abstract class AbstractCalendarPresenter<T extends GenericCalendarDisplay
       i = new Interval(current, cellDuration);
       count++;
     }
-    return getPositionForCellIndex(count);
+    return getPositionForCellIndex(include ? count : Math.max(count - 1, 0));
   }
 
   /**
