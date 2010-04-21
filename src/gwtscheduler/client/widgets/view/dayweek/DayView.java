@@ -20,7 +20,7 @@ public class DayView extends AbstractDaysView {
 
   @Override
   public int getEffectiveWidth() {
-    return getWidth() - CSS.smallPaddingPx();
+    return getWidth() /*- CSS.smallPaddingPx()*/;
   }
 
   @Override

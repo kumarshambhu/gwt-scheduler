@@ -10,8 +10,10 @@ import gwtscheduler.client.widgets.common.event.LassoEventHandler;
 import gwtscheduler.client.widgets.common.event.LassoStartSelectionEvent;
 import gwtscheduler.client.widgets.common.event.LassoUpdateSelectionEvent;
 import gwtscheduler.common.model.event.AbstractAppointment;
-import gwtscheduler.common.model.event.simple.SimpleAppointment;
+import gwtscheduler.common.model.event.AllDayAppointment;
+import gwtscheduler.common.model.event.SimpleAppointment;
 
+import org.goda.time.Duration;
 import org.goda.time.Interval;
 
 /**
@@ -37,9 +39,14 @@ public class EventsMediator implements LassoEventHandler {
   @Override
   public void onEndSelection(LassoEndSelectionEvent event) {
     if (event.subject == presenter) {
+      AbstractAppointment appointment = null;
       Interval time = presenter.getIntervalForRange(event.cell, event.endCell);
-      AbstractAppointment appointment = new SimpleAppointment(time);
-      AppointmentEvent evt = new AppointmentEvent(presenter, appointment);
+      if (time.toDuration().isLongerThan(new Duration(1000 * 60 * 60 * 24))) {
+        appointment = new AllDayAppointment(time);
+      } else {
+        appointment = new SimpleAppointment(time);
+      }
+      AppointmentEvent evt = new AppointmentEvent(appointment);
       eventBus.fireEvent(evt);
     }
   }

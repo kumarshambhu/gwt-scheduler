@@ -14,6 +14,7 @@ public class TabPanelContainer extends RoundedPanel {
    */
   public TabPanelContainer() {
     super(RoundedPanel.ALL, 4);
+    //TODO move to CSS
     setCornerColor("#92C1F0");
   }
 

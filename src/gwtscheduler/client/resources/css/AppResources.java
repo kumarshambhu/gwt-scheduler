@@ -14,14 +14,14 @@ public interface AppResources extends ClientBundle {
    * This is the main stylesheet for days and weeks.
    * @return the day/week stylesheet resource
    */
-  @Source(value = {"structural-common.css", "structural-day-week.css"})
+  @Source(value = {"base.css", "base-day-week.css"})
   public DayWeekCssResource dayWeekCss();
 
   /**
    * This is the main stylesheet for months.
    * @return the month stylesheet resource
    */
-  @Source(value = {"structural-common.css", "structural-month.css"})
+  @Source(value = {"base.css", "base-month.css"})
   public MonthCssResource monthCss();
 
 }

@@ -1,5 +1,7 @@
 package gwtscheduler.common.model.event;
 
+import java.io.Serializable;
+
 import org.goda.time.Interval;
 
 /**
@@ -8,16 +10,17 @@ import org.goda.time.Interval;
  * @version $Revision: $
  * @since 1.0
  */
-public abstract class AbstractAppointment {
+public abstract class AbstractAppointment implements Serializable {
 
+  /** the event's date/time range */
   protected Interval interval;
+  /** the event type */
   protected EventType type;
 
   /**
    * Creates a new scheduled event.
-   * @param start
-   * @param end
-   * @param type
+   * @param interval the interval
+   * @param type the event type
    */
   public AbstractAppointment(Interval interval, EventType type) {
     this.interval = filter(interval);

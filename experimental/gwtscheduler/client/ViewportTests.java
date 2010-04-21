@@ -72,12 +72,13 @@ public class ViewportTests implements EntryPoint, ClickHandler {
     CalendarPresenter curr = main.getCurrentPresenter();
     ReadableDateTime navDate = getCurrentDate();
 
+    //FIXME: this is buggy
     if (event.getSource() == back) {
       Interval i = curr.getPreviousInterval(navDate);
-      navDate = i.getStart();
+      navDate = i.getStart().plusMillis((int) (i.getEndMillis() - i.getStartMillis()) / 2);
     } else if (event.getSource() == forward) {
       Interval i = curr.getNextInterval(navDate);
-      navDate = i.getStart();
+      navDate = i.getStart().plusMillis((int) (i.getEndMillis() - i.getStartMillis()) / 2);
     } else if (event.getSource() == today) {
       //no need
     }

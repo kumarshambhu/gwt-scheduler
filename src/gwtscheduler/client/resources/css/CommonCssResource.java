@@ -29,12 +29,6 @@ interface CommonCssResource extends CssResource {
   String lassoElement();
 
   /**
-   * Gets the event element class name
-   * @return the css class for an event
-   */
-  String eventElement();
-
-  /**
    * Gets the generic container padding.
    * @return the generic container padding in pixels
    */

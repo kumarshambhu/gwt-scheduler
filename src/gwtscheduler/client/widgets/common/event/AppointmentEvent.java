@@ -1,6 +1,5 @@
 package gwtscheduler.client.widgets.common.event;
 
-import gwtscheduler.client.widgets.common.CalendarPresenter;
 import gwtscheduler.common.model.event.AbstractAppointment;
 
 import com.google.gwt.event.shared.GwtEvent;
@@ -14,16 +13,13 @@ import com.google.gwt.event.shared.GwtEvent;
 //TODO change to an interface or something more generic
 public class AppointmentEvent extends GwtEvent<AppointmentHandler> {
 
-  public final CalendarPresenter owner;
   public final AbstractAppointment appointment;
 
   /**
    * Default constructor for an appointment event
-   * @param owner the owner
    * @param appointment the appointment
    */
-  public AppointmentEvent(CalendarPresenter owner, AbstractAppointment appointment) {
-    this.owner = owner;
+  public AppointmentEvent(AbstractAppointment appointment) {
     this.appointment = appointment;
   }
 

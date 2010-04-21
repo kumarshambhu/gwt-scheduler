@@ -1,0 +1,20 @@
+<!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
+<ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder"
+  xmlns:g="urn:import:com.google.gwt.user.client.ui" xmlns:rp="urn:import:org.cobogw.gwt.user.client.ui">
+  <ui:style>
+    .event {
+    	background-color: #92C1F0;
+    }
+  </ui:style>
+
+  <g:SimplePanel ui:field="container">
+    <rp:RoundedPanel ui:field="roundedPanel">
+      <g:SimplePanel styleName="{style.event}">
+        <g:HTML ui:field="impl">
+          Event
+      </g:HTML>
+      </g:SimplePanel>
+    </rp:RoundedPanel>
+  </g:SimplePanel>
+
+</ui:UiBinder> 

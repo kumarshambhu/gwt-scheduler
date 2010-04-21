@@ -1,4 +1,6 @@
-package gwtscheduler.common.model.event.simple;
+package gwtscheduler.common.model.event;
+
+import java.io.Serializable;
 
 import gwtscheduler.common.model.event.AbstractAppointment;
 import gwtscheduler.common.model.event.EventType;
@@ -11,7 +13,7 @@ import org.goda.time.Interval;
  * @version $Revision: $
  * @since 1.0
  */
-public class SimpleAppointment extends AbstractAppointment {
+public class SimpleAppointment extends AbstractAppointment implements Serializable {
 
   /**
    * @param start
