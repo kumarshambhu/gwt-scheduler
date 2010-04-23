@@ -31,7 +31,6 @@ import com.google.gwt.event.dom.client.MouseUpEvent;
 import com.google.gwt.event.dom.client.MouseUpHandler;
 import com.google.gwt.event.shared.HandlerRegistration;
 import com.google.gwt.user.client.DOM;
-import com.google.gwt.user.client.Element;
 import com.google.gwt.user.client.ui.AbsolutePanel;
 import com.google.gwt.user.client.ui.Widget;
 
@@ -111,11 +110,9 @@ class LassoPanel extends AbstractGridOverlay implements HasLassoHandlers, MouseD
     if (isMouseDown) {
       return;
     }
-    // TODO verify if the lasso panel was the src
     isMouseDown = true;
     overlayPanel.clear();
-    Element lassoEl = overlayPanel.getElement();
-    DOM.setIntStyleAttribute(lassoEl, "zIndex", LASSO_ZINDEX_SELECTING);
+    DOM.setIntStyleAttribute(getElement(), "zIndex", LASSO_ZINDEX_SELECTING);
 
     startPos = calculateCellPosition(event);
     selectRange(startPos, startPos);

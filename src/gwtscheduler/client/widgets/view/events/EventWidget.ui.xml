@@ -8,13 +8,13 @@
   </ui:style>
 
   <g:SimplePanel ui:field="container">
-    <rp:RoundedPanel ui:field="roundedPanel">
+    <rp:RoundedLinePanel ui:field="roundedPanel">
       <g:SimplePanel styleName="{style.event}">
         <g:HTML ui:field="impl">
           Event
       </g:HTML>
       </g:SimplePanel>
-    </rp:RoundedPanel>
+    </rp:RoundedLinePanel>
   </g:SimplePanel>
 
 </ui:UiBinder> 

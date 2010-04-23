@@ -1,5 +1,6 @@
 package gwtscheduler.client.widgets.view.events;
 
+import org.cobogw.gwt.user.client.ui.RoundedLinePanel;
 import org.cobogw.gwt.user.client.ui.RoundedPanel;
 
 import com.google.gwt.core.client.GWT;
@@ -21,7 +22,7 @@ public class EventWidget extends Composite {
   }
 
   @UiField(provided = true)
-  RoundedPanel roundedPanel;
+  RoundedLinePanel roundedPanel;
 
   @UiField
   SimplePanel container;
@@ -29,23 +30,21 @@ public class EventWidget extends Composite {
   @UiField
   HTML impl;
 
-  static final int CornerHeight = 4;
+  static final int CornerHeight = 1;
 
   /**
    * Default constructor.
    */
   public EventWidget() {
-    roundedPanel = new RoundedPanel(RoundedPanel.ALL, 2);
-    roundedPanel.setCornerColor("#92C1F0");
-//    roundedPanel.setBorderColor("silver");
+    roundedPanel = new RoundedLinePanel(RoundedPanel.ALL, CornerHeight);
+    roundedPanel.setCornerColor("#666", "#92C1F0", "red");//.setCornerColor("#92C1F0");
     initWidget(uiBinder.createAndBindUi(this));
-
   }
 
   @Override
   public void setPixelSize(int width, int height) {
     //we resize the impl instead
-    impl.setPixelSize(width, height - ( CornerHeight));
+    impl.setPixelSize(width - (2 * CornerHeight), height - (2 * CornerHeight));
   }
 
 }
