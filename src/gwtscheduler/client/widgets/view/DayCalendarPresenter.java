@@ -38,6 +38,8 @@ public class DayCalendarPresenter extends AbstractCalendarPresenter<AbstractDays
   /**
    * Default constructor.
    * @param cfg the application configuration
+   * @param view the view
+   * @param bus the event bus
    */
   @Inject
   protected DayCalendarPresenter(AppConfiguration cfg, @Day AbstractDaysView view, EventBus bus) {
@@ -59,14 +61,15 @@ public class DayCalendarPresenter extends AbstractCalendarPresenter<AbstractDays
   public int getRowNum() {
     return rows;
   }
-  
+
   @Override
   public void onCalendarNavigation(CalendarNavigationEvent calendarNavigationEvent) {
     ReadableDateTime date = calendarNavigationEvent.date;
-    if (!date.equals(getFactory().current())) {
-      getFactory().init(IntervalType.DAY, date);
+    if (!date.equals(getDateGenerator().current())) {
+      getDateGenerator().init(IntervalType.DAY, date);
+      getDisplay().clearAllAppointments();
     }
-    Interval period = getFactory().interval();
+    Interval period = getDateGenerator().interval();
     decorator.decorate(period, getDisplay().getDecorables());
   }
 
@@ -100,7 +103,7 @@ public class DayCalendarPresenter extends AbstractCalendarPresenter<AbstractDays
     assert index >= 0 : "Index should not be negative";
     assert index <= getColLength() : "Index should be less than total number of cells";
 
-    return new int[] {Math.min(index, getColLength() -1), 0};
+    return new int[] {Math.min(index, getColLength() - 1), 0};
   }
 
 }

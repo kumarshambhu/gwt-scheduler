@@ -29,7 +29,7 @@ public abstract class AbstractCalendarPresenter<T extends GenericCalendarDisplay
     CalendarNavigationHandler, ComplexGrid, AppointmentHandler {
 
   @Inject
-  private DateGenerator factory;
+  private DateGenerator generator;
 
   /**
    * Default constructor.
@@ -44,7 +44,7 @@ public abstract class AbstractCalendarPresenter<T extends GenericCalendarDisplay
 
   @Override
   public Interval getCurrentInterval() {
-    return getFactory().interval();
+    return getDateGenerator().interval();
   }
 
   @Override
@@ -53,23 +53,13 @@ public abstract class AbstractCalendarPresenter<T extends GenericCalendarDisplay
   }
 
   @Override
-  public Interval getNextInterval(ReadableDateTime navDate) {
-    return getFactory().next().interval();
-  }
-
-  @Override
-  public Interval getPreviousInterval(ReadableDateTime navDate) {
-    return getFactory().previous().interval();
-  }
-
-  @Override
   public ReadableDateTime getNextDate(ReadableDateTime from) {
-    return getFactory().next().current();
+    return getDateGenerator().nextDate();
   }
 
   @Override
   public ReadableDateTime getPreviousDate(ReadableDateTime from) {
-    return getFactory().previous().current();
+    return getDateGenerator().previousDate();
   }
 
   /**
@@ -89,7 +79,7 @@ public abstract class AbstractCalendarPresenter<T extends GenericCalendarDisplay
 
   @Override
   public boolean isWithinDateRange(Interval interval) {
-    return getFactory().interval().contains(interval);
+    return getDateGenerator().interval().contains(interval);
   }
 
   /**
@@ -110,8 +100,8 @@ public abstract class AbstractCalendarPresenter<T extends GenericCalendarDisplay
    * Gets the date factory.
    * @return the date factory
    */
-  protected DateGenerator getFactory() {
-    return factory;
+  protected DateGenerator getDateGenerator() {
+    return generator;
   }
 
   /**
@@ -181,7 +171,7 @@ public abstract class AbstractCalendarPresenter<T extends GenericCalendarDisplay
   protected int[] getCellPositionFor(ReadableDateTime date, boolean include) {
     int count = 0;
     Duration cellDuration = getDurationPerCells(1);
-    DateTime current = getFactory().interval().getStart();
+    DateTime current = getDateGenerator().interval().getStart();
 
     //TODO this could be heavily optimized
     //we calculate the cell index, then we defer the row|col calculation
@@ -199,12 +189,13 @@ public abstract class AbstractCalendarPresenter<T extends GenericCalendarDisplay
    * @param coordinates the cell position
    * @return the coordinates in pixels
    */
+  //TODO maybe this method belongs in the display...
   public int[] getAbsolutePositionForCell(int[] cellPos) {
     assert cellPos[0] < getRowNum() : "cell row num > presnter row num!";
     assert cellPos[1] < getColNum() : "cell row num > presnter row num!";
     assert cellPos != null : "Cell position cannot be null";
     assert cellPos.length == 2 : "Position length != 2";
-
+    
     int rowH = Math.round((float) getHeight() / getRowNum());
     int colW = Math.round((float) getWidth() / getColNum());
     return new int[] {cellPos[1] * colW, cellPos[0] * rowH};
@@ -239,7 +230,7 @@ public abstract class AbstractCalendarPresenter<T extends GenericCalendarDisplay
    * @param factory the factory
    */
   public void setFactory(DateGenerator factory) {
-    this.factory = factory;
+    this.generator = factory;
   }
 
 }

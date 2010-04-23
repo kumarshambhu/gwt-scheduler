@@ -46,7 +46,7 @@ public class GenericDateGenerator implements DateGenerator {
     mtd.setMillisOfSecond(0);
     mtd.setSecondOfMinute(0);
     mtd.setMinuteOfHour(0);
-    
+
     this.current = mtd.toDateTime();
 
     if (IntervalType.DAY.equals(interval)) {
@@ -66,13 +66,23 @@ public class GenericDateGenerator implements DateGenerator {
   }
 
   public DateGenerator next() {
-    generator.next();
+    current = generator.next();
     return this;
   }
 
   public DateGenerator previous() {
-    generator.previous();
+    current = generator.previous();
     return this;
+  }
+
+  @Override
+  public DateTime nextDate() {
+    return generator.next();
+  }
+
+  @Override
+  public DateTime previousDate() {
+    return generator.previous();
   }
 
   public Interval interval() {
@@ -87,18 +97,18 @@ public class GenericDateGenerator implements DateGenerator {
     /**
      * Advances the date.
      */
-    void next();
+    DateTime next();
+
+    /**
+     * Goes backward.
+     */
+    DateTime previous();
 
     /**
      * Moves to the specified date.
      * @param start the date
      */
     void goTo(DateTime start);
-
-    /**
-     * Goes backward.
-     */
-    void previous();
 
     /**
      * Returns the current interval.
@@ -122,12 +132,12 @@ public class GenericDateGenerator implements DateGenerator {
       current = where;
     }
 
-    public void next() {
-      current = current.plusDays(1);
+    public DateTime next() {
+      return current.plusDays(1);
     }
 
-    public void previous() {
-      current = current.plusDays(-1);
+    public DateTime previous() {
+      return current.plusDays(-1);
     }
 
   }
@@ -160,12 +170,12 @@ public class GenericDateGenerator implements DateGenerator {
       return new Interval(current, end);
     }
 
-    public void next() {
-      current = current.plusDays(WeekSize);
+    public DateTime next() {
+      return current.plusDays(WeekSize);
     }
 
-    public void previous() {
-      current = current.plusDays(-WeekSize);
+    public DateTime previous() {
+      return current.plusDays(-WeekSize);
     }
 
   }
@@ -204,20 +214,22 @@ public class GenericDateGenerator implements DateGenerator {
       return new Interval(iterator, end);
     }
 
-    public void next() {
-      moveStart(1);
+    public DateTime next() {
+      return copyStartPointer(1);
     }
 
-    public void previous() {
-      moveStart(-1);
+    public DateTime previous() {
+      return copyStartPointer(-1);
     }
 
     /**
-     * Utility method that advances the start date pointer a given amount.
+     * Utility method that advances a copy of the start date pointer a given
+     * amount.
      * @param months the number of months to move. Can be negative
+     * @return a copy of the start date pointer
      */
-    private void moveStart(int months) {
-      current = current.plusMonths(months);
+    private DateTime copyStartPointer(int months) {
+      return current.plusMonths(months);
     }
   }
 

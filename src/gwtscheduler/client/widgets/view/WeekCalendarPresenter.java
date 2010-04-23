@@ -65,7 +65,7 @@ public class WeekCalendarPresenter extends AbstractCalendarPresenter<AbstractDay
   @Override
   public void onCalendarNavigation(CalendarNavigationEvent calendarNavigationEvent) {
     ReadableDateTime date = calendarNavigationEvent.date;
-    if (!date.equals(getFactory().current())) {
+    if (!date.equals(getDateGenerator().current())) {
       MutableDateTime copy = date.toMutableDateTime();
       AppConfiguration cfg = AppInjector.GIN.getInjector().getConfiguration();
       //adjust to first day of week
@@ -73,9 +73,11 @@ public class WeekCalendarPresenter extends AbstractCalendarPresenter<AbstractDay
       while (copy.getDayOfWeek() != firstDay) {
         copy.addDays(-1);
       }
-      getFactory().init(IntervalType.WEEK, copy);
+      
+      getDisplay().clearAllAppointments();
+      getDateGenerator().init(IntervalType.WEEK, copy);
     }
-    Interval period = getFactory().interval();
+    Interval period = getDateGenerator().interval();
     decorator.decorate(period, getDisplay().getDecorables());
   }
 

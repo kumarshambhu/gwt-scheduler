@@ -164,6 +164,11 @@ public abstract class AbstractDaysView extends Composite implements DaysDisplay,
     eventsPanel.addAppointment(evt, eventSpan);
   }
 
+  @Override
+  public void clearAllAppointments() {
+    eventsPanel.clear();
+  }
+
   public List<Cell<Element>> getColumnsDecorableElements() {
     return Collections.unmodifiableList(topLabels);
   }

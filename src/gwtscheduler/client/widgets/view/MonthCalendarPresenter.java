@@ -55,10 +55,11 @@ public class MonthCalendarPresenter extends AbstractCalendarPresenter<MonthDispl
   @Override
   public void onCalendarNavigation(CalendarNavigationEvent calendarNavigationEvent) {
     ReadableDateTime date = calendarNavigationEvent.date;
-    if (!date.equals(getFactory().current())) {
-      getFactory().init(IntervalType.MONTH, date);
+    if (!date.equals(getDateGenerator().current())) {
+      getDateGenerator().init(IntervalType.MONTH, date);
+      getDisplay().clearAllAppointments();
     }
-    ReadableInterval intv = getFactory().interval();
+    ReadableInterval intv = getDateGenerator().interval();
     adjustVisibleRows(intv);
     decorator.decorate(intv, getDisplay().getDecorables());
   }

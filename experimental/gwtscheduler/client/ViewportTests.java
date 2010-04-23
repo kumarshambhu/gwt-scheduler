@@ -36,6 +36,7 @@ public class ViewportTests implements EntryPoint, ClickHandler {
 
     main = uiResources.getMainPanel();
 
+    //TODO stick this in a widget
     back = new Button("&laquo;", this);
     forward = new Button("&raquo;", this);
     today = new Button("today", this);
@@ -70,7 +71,7 @@ public class ViewportTests implements EntryPoint, ClickHandler {
 
     CalendarPresenter curr = main.getCurrentPresenter();
     ReadableDateTime navDate = null;
-    
+
     if (event.getSource() == back) {
       navDate = curr.getPreviousDate(navDate);
     } else if (event.getSource() == forward) {

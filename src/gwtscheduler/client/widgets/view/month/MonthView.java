@@ -159,6 +159,11 @@ public class MonthView extends Composite implements LassoAwarePanel.LassoHandler
     eventsPanel.addAppointment(evt, eventSpan);
   }
 
+  @Override
+  public void clearAllAppointments() {
+    eventsPanel.clear();
+  }
+
   /**
    * Shows a given number of rows, hiding the others.
    * @param rowNum the number of rows

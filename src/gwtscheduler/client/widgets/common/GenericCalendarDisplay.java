@@ -22,6 +22,11 @@ public interface GenericCalendarDisplay extends WidgetDisplay, ComplexGrid {
   void addAppointment(AppointmentEvent evt, EventRange eventSpan);
 
   /**
+   * Clears all appointments.
+   */
+  void clearAllAppointments();
+
+  /**
    * Forces the layout.
    */
   void forceLayout();

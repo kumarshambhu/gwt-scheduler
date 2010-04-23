@@ -70,22 +70,6 @@ public interface CalendarPresenter extends Presenter {
   Interval getCurrentInterval();
 
   /**
-   * Returns the previous instant for the supplied date, according to this
-   * presenter's properties.
-   * @param navDate the nav date
-   * @return the previous date
-   */
-  Interval getPreviousInterval(ReadableDateTime navDate);
-
-  /**
-   * Returns the next date for the supplied date, according to this presenter's
-   * properties.
-   * @param navDate the nav date
-   * @return the next date
-   */
-  Interval getNextInterval(ReadableDateTime navDate);
-
-  /**
    * Gets the previous date.
    * @param from the starting date
    * @return the previous date

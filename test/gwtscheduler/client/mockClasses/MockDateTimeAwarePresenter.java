@@ -109,16 +109,6 @@ public class MockDateTimeAwarePresenter implements ComplexGrid, CalendarPresente
   }
 
   @Override
-  public Interval getNextInterval(ReadableDateTime navDate) {
-    return null;
-  }
-
-  @Override
-  public Interval getPreviousInterval(ReadableDateTime navDate) {
-    return null;
-  }
-
-  @Override
   public void forceLayout() {
   }
 

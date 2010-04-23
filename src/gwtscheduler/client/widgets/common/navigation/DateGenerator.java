@@ -46,6 +46,18 @@ public interface DateGenerator {
   DateGenerator previous();
 
   /**
+   * Gets the next date "pointer"
+   * @return
+   */
+  DateTime nextDate();
+
+  /**
+   * Gets the previous date "pointer"
+   * @return
+   */
+  DateTime previousDate();
+
+  /**
    * Creates a new time period.
    * @return the time period
    */
