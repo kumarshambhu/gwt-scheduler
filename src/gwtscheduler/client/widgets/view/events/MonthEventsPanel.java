@@ -23,7 +23,7 @@ public class MonthEventsPanel extends EventsPanel {
 
       for (int row = startRow; row <= endRow; row++) {
         int[] from = (row == startRow) ? eventRange.from : new int[] {row, 0};
-        int[] to = (row == endRow) ? eventRange.to : new int[] {row, eventRange.owner.getColNum()};
+        int[] to = (row == endRow) ? eventRange.to : new int[] {row, eventRange.owner.getColNum() - 1};
 
         EventRange subRange = new EventRange(eventRange.owner, from, to);
         ranges.add(subRange);
