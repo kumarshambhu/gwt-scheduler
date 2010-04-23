@@ -85,4 +85,17 @@ public interface CalendarPresenter extends Presenter {
    */
   Interval getNextInterval(ReadableDateTime navDate);
 
+  /**
+   * Gets the previous date.
+   * @param from the starting date
+   * @return the previous date
+   */
+  ReadableDateTime getPreviousDate(ReadableDateTime from);
+
+  /**
+   * Gets the next date.
+   * @param from the starting date
+   * @return the next date
+   */
+  ReadableDateTime getNextDate(ReadableDateTime from);
 }

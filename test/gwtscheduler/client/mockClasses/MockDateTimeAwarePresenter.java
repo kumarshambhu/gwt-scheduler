@@ -133,6 +133,16 @@ public class MockDateTimeAwarePresenter implements ComplexGrid, CalendarPresente
   }
 
   @Override
+  public ReadableDateTime getNextDate(ReadableDateTime from) {
+    return null;
+  }
+
+  @Override
+  public ReadableDateTime getPreviousDate(ReadableDateTime from) {
+    return null;
+  }
+
+  @Override
   public void bind() {
   }
 

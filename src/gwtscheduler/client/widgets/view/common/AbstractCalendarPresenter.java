@@ -9,7 +9,7 @@ import gwtscheduler.client.widgets.common.event.AppointmentEvent;
 import gwtscheduler.client.widgets.common.event.AppointmentHandler;
 import gwtscheduler.client.widgets.common.navigation.CalendarNavigationHandler;
 import gwtscheduler.client.widgets.common.navigation.DateGenerator;
-import gwtscheduler.client.widgets.view.events.EventSpan;
+import gwtscheduler.client.widgets.view.events.EventRange;
 import gwtscheduler.client.widgets.view.events.EventsMediator;
 
 import org.goda.time.DateTime;
@@ -62,6 +62,16 @@ public abstract class AbstractCalendarPresenter<T extends GenericCalendarDisplay
     return getFactory().previous().interval();
   }
 
+  @Override
+  public ReadableDateTime getNextDate(ReadableDateTime from) {
+    return getFactory().next().current();
+  }
+
+  @Override
+  public ReadableDateTime getPreviousDate(ReadableDateTime from) {
+    return getFactory().previous().current();
+  }
+
   /**
    * Events methods.
    */
@@ -72,7 +82,7 @@ public abstract class AbstractCalendarPresenter<T extends GenericCalendarDisplay
     if (isWithinDateRange(interval)) {
       int[] from = getCellPositionFor(interval.getStart(), true);
       int[] to = getCellPositionFor(interval.getEnd(), false);
-      EventSpan eventSpan = new EventSpan(this, from, to);
+      EventRange eventSpan = new EventRange(this, from, to);
       getDisplay().addAppointment(evt, eventSpan);
     }
   }

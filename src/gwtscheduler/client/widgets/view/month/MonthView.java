@@ -16,7 +16,7 @@ import gwtscheduler.client.widgets.common.event.WidgetRedrawHandler;
 import gwtscheduler.client.widgets.common.event.WidgetResizeEvent;
 import gwtscheduler.client.widgets.view.common.LassoAwarePanel;
 import gwtscheduler.client.widgets.view.common.cell.BaseCell;
-import gwtscheduler.client.widgets.view.events.EventSpan;
+import gwtscheduler.client.widgets.view.events.EventRange;
 import gwtscheduler.client.widgets.view.events.MonthEventsPanel;
 
 import java.util.ArrayList;
@@ -155,7 +155,7 @@ public class MonthView extends Composite implements LassoAwarePanel.LassoHandler
   }
 
   @Override
-  public void addAppointment(AppointmentEvent evt, EventSpan eventSpan) {
+  public void addAppointment(AppointmentEvent evt, EventRange eventSpan) {
     eventsPanel.addAppointment(evt, eventSpan);
   }
 

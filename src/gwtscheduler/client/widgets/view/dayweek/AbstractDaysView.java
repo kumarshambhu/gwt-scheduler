@@ -18,7 +18,7 @@ import gwtscheduler.client.widgets.common.event.WidgetResizeEvent;
 import gwtscheduler.client.widgets.view.common.LassoAwarePanel;
 import gwtscheduler.client.widgets.view.common.cell.BaseCell;
 import gwtscheduler.client.widgets.view.events.DaysEventsPanel;
-import gwtscheduler.client.widgets.view.events.EventSpan;
+import gwtscheduler.client.widgets.view.events.EventRange;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -160,7 +160,7 @@ public abstract class AbstractDaysView extends Composite implements DaysDisplay,
   }
 
   @Override
-  public void addAppointment(AppointmentEvent evt, EventSpan eventSpan) {
+  public void addAppointment(AppointmentEvent evt, EventRange eventSpan) {
     eventsPanel.addAppointment(evt, eventSpan);
   }
 

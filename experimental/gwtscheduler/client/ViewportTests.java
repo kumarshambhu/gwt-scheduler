@@ -6,7 +6,6 @@ import gwtscheduler.client.resources.Resources;
 import gwtscheduler.client.widgets.common.CalendarPresenter;
 import gwtscheduler.client.widgets.common.navigation.TabPanelMainView;
 
-import org.goda.time.Interval;
 import org.goda.time.MutableDateTime;
 import org.goda.time.ReadableDateTime;
 
@@ -70,17 +69,14 @@ public class ViewportTests implements EntryPoint, ClickHandler {
     UIManager registry = uiResources.getUIRegistry();
 
     CalendarPresenter curr = main.getCurrentPresenter();
-    ReadableDateTime navDate = getCurrentDate();
-
-    //FIXME: this is buggy
+    ReadableDateTime navDate = null;
+    
     if (event.getSource() == back) {
-      Interval i = curr.getPreviousInterval(navDate);
-      navDate = i.getStart().plusMillis((int) (i.getEndMillis() - i.getStartMillis()) / 2);
+      navDate = curr.getPreviousDate(navDate);
     } else if (event.getSource() == forward) {
-      Interval i = curr.getNextInterval(navDate);
-      navDate = i.getStart().plusMillis((int) (i.getEndMillis() - i.getStartMillis()) / 2);
+      navDate = curr.getNextDate(navDate);
     } else if (event.getSource() == today) {
-      //no need
+      navDate = getCurrentDate();
     }
 
     registry.fireDateNavigation(navDate);
