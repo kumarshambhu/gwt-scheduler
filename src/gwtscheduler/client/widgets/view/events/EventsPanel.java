@@ -32,7 +32,6 @@ public abstract class EventsPanel extends AbstractGridOverlay {
    */
   public EventsPanel() {
     getElement().getStyle().setPosition(Position.ABSOLUTE);
-//    getElement().getStyle().setZIndex(Constants.EVENTS_ZINDEX);
     events = new HashMap<AppointmentEvent, List<Widget>>();
     widgetSpans = new HashMap<Widget, EventRange>();
   }
